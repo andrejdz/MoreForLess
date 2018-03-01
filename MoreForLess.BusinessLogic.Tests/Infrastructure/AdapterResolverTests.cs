@@ -21,17 +21,17 @@ namespace MoreForLess.BusinessLogic.Tests.Infrastructure
             var actual = new AdapterResolver(this._signedRequestCreatorService.Object).Resolve(_platform);
 
             // Assert
-            Assert.That(actual, Is.TypeOf<OnlinerAdapter>());
+            Assert.That(actual, Is.TypeOf<AmazonAdapter>());
         }
 
         [Test]
-        public void AdapterResolver_ResolveTest_ValidPlatformAliExpress()
+        public void AdapterResolver_ResolveTest_ValidPlatformAmazon()
         {
             // Act
-            var actual = new AdapterResolver(this._signedRequestCreatorService.Object).Resolve("AliExpress");
+            var actual = new AdapterResolver(this._signedRequestCreatorService.Object).Resolve("Amazon");
 
             // Assert
-            Assert.That(actual, Is.TypeOf<AliExpressAdapter>());
+            Assert.That(actual, Is.TypeOf<AmazonAdapter>());
         }
 
 
@@ -43,6 +43,6 @@ namespace MoreForLess.BusinessLogic.Tests.Infrastructure
         }
 
         // Arrange
-        private const string _platform = "Onliner";
+        private const string _platform = "Amazon";
     }
 }

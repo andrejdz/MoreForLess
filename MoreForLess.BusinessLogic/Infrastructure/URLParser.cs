@@ -22,20 +22,6 @@ namespace MoreForLess.BusinessLogic.Infrastructure
         /// </summary>
         public URLParser()
         {
-            var onlinerPlatformInfo = new PlatformInfo
-            {
-                Platform = "Onliner",
-                IdRegex = new Regex(@"(?<=\/).+$"),
-                UrlRegex = new Regex(@"^.*$")
-            };
-
-            var aliExpressPlatformInfo = new PlatformInfo
-            {
-                Platform = "AliExpress",
-                IdRegex = new Regex(@"(?<=\/).+$"),
-                UrlRegex = new Regex(@"^.+(?=\?)")
-            };
-
             var amazonPlatformInfo = new PlatformInfo
             {
                 Platform = "Amazon",
@@ -43,9 +29,6 @@ namespace MoreForLess.BusinessLogic.Infrastructure
                 UrlRegex = new Regex(@"^(.+(?=\?)|.+$)")
             };
 
-            this._platforms.Add("catalog.onliner.by", onlinerPlatformInfo);
-            this._platforms.Add("www.aliexpress.com", aliExpressPlatformInfo);
-            this._platforms.Add("m.aliexpress.com", aliExpressPlatformInfo);
             this._platforms.Add("www.amazon.com", amazonPlatformInfo);
         }
 

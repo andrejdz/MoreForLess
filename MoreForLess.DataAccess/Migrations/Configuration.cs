@@ -31,9 +31,7 @@ namespace MoreForLess.DataAccess.Migrations
 
             List<Shop> shopList = new List<Shop>()
             {
-                new Shop() { Name = "ONLINER" },
                 new Shop() { Name = "AMAZON" },
-                new Shop() { Name = "ALIEXPRESS" },
                 new Shop() { Name = "EBAY" },
             };
 
