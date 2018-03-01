@@ -39,16 +39,12 @@ namespace MoreForLess.BusinessLogic.Tests.Services
         {
             this._currencies = new List<Currency>
             {
-                new Currency {Name = "BYN"},
                 new Currency {Name = "USD"},
-                new Currency {Name = "EUR"}
             };
 
             this._shops = new List<Shop>()
             {
-                new Shop { Name = "ONLINER" },
                 new Shop { Name = "AMAZON" },
-                new Shop { Name = "ALIEXPRESS" },
                 new Shop { Name = "EBAY" },
             };
 
@@ -57,11 +53,11 @@ namespace MoreForLess.BusinessLogic.Tests.Services
                 new Good
                 {
                     Id=1,
-                    Name="Apple MacBook Air 13",
-                    Price = 2050M,
-                    IdGoodOnShop="B00IOY8XWQ",
-                    LinkOnProduct = "https://catalog.onliner.by/notebook/apple/mqd32",
-                    LinkOnPicture = "https://content2.onliner.by/catalog/device/header/69fd1638fafefbe0ecc02ab7fd9391f0.jpeg",
+                    Name="Fire TV Stick with Alexa Voice Remote Streaming Media Player",
+                    Price = 30M,
+                    IdGoodOnShop="B00ZV9RDKK",
+                    LinkOnProduct = "https://www.amazon.com/dp/B00ZV9RDKK/ref=fs_ods_smp_tk",
+                    LinkOnPicture = "https://images-na.ssl-images-amazon.com/images/I/61TEbUfnYtL._SY450_.jpg",
                     CurrencyId=1,
                     ShopId =1,
                     Currency = this._currencies[0],
@@ -70,11 +66,11 @@ namespace MoreForLess.BusinessLogic.Tests.Services
                 new Good
                 {
                     Id=2,
-                    Name="Samsung Galaxy Note8 Dual SIM 64GB",
-                    Price = 1799M,
-                    IdGoodOnShop="dgte5466",
-                    LinkOnProduct = "https://catalog.onliner.by/mobile/samsung/galaxynote8",
-                    LinkOnPicture = "https://content2.onliner.by/catalog/device/header/670e197659483f1565345d5f9f5e2461.jpeg",
+                    Name="VTech Sit-to-Stand Learning Walker",
+                    Price = 25M,
+                    IdGoodOnShop="B000NZQ010",
+                    LinkOnProduct = "https://www.amazon.com/gp/product/B000NZQ010/ref=s9_acsd_top_hd_bw_b1MAZFb_c_x_w",
+                    LinkOnPicture = "https://images-na.ssl-images-amazon.com/images/I/71nHNLMhgYL._SY450_.jpg",
                     CurrencyId=1,
                     ShopId =1,
                     Currency = this._currencies[0],
@@ -84,13 +80,13 @@ namespace MoreForLess.BusinessLogic.Tests.Services
 
             this._goodForCreate = new GoodDomainModel
             {
-                Name = "Canon EOS 700D Kit 18-55 IS STM",
-                Price = 1090M,
-                LinkOnProduct = "https://catalog.onliner.by/photo/canon/eos700d1855isstm",
-                LinkOnPicture = "https://content2.onliner.by/catalog/device/header/76feafa9888ce98634d48176b55f8eb4.jpg",
-                IdGoodOnShop = "76hjh87",
-                ShopName = "ONLINER",
-                CurrencyName = "BYN"
+                Name = "Fire TV Stick with Alexa Voice Remote Streaming Media Player",
+                Price = 30M,
+                LinkOnProduct = "https://www.amazon.com/dp/B00ZV9RDKK/ref=fs_ods_smp_tk",
+                LinkOnPicture = "https://images-na.ssl-images-amazon.com/images/I/61TEbUfnYtL._SY450_.jpg",
+                IdGoodOnShop = "B00ZV9RDKK",
+                ShopName = "AMAZON",
+                CurrencyName = "USD"
 
             };
 
@@ -120,12 +116,14 @@ namespace MoreForLess.BusinessLogic.Tests.Services
                 });
 
             this._context = new Mock<ApplicationDbContext>();
+
             this._dbSetGoods = new Mock<DbSet<Good>>().SetupData(this._goods);
             this._dbSetCurrencies = new Mock<DbSet<Currency>>().SetupData(this._currencies);
             this._dbSetShops = new Mock<DbSet<Shop>>().SetupData(this._shops);
-            this._context.Setup(m => m.Goods).Returns(this._dbSetGoods.Object);
-            this._context.Setup(m => m.Currencies).Returns(this._dbSetCurrencies.Object);
-            this._context.Setup(m => m.Shops).Returns(this._dbSetShops.Object);
+
+            this._context.Setup(c => c.Goods).Returns(this._dbSetGoods.Object);
+            this._context.Setup(c => c.Currencies).Returns(this._dbSetCurrencies.Object);
+            this._context.Setup(c => c.Shops).Returns(this._dbSetShops.Object);
         }
 
         [Test]
@@ -133,7 +131,8 @@ namespace MoreForLess.BusinessLogic.Tests.Services
         {
             var service = new GoodService(this._context.Object, this._mockMapper.Object, this._validator);
             var actual = await service.CreateAsync(this._goodForCreate);
-            Assert.AreEqual("Canon EOS 700D Kit 18-55 IS STM", this._dbSetGoods.Object.FirstOrDefaultAsync(u => u.Price == 1090M).Result.Name);
+            Assert.AreEqual("Fire TV Stick with Alexa Voice Remote Streaming Media Player",
+                this._dbSetGoods.Object.FirstOrDefaultAsync(u => u.Price == 30M).Result.Name);
         }
 
         [Test]
@@ -191,7 +190,7 @@ namespace MoreForLess.BusinessLogic.Tests.Services
         [Test]
         public async Task GoodService_IsItemExist_ExistGoodReturnTrue()
         {
-            string url = "https://catalog.onliner.by/notebook/apple/mqd32";
+            string url = "https://www.amazon.com/dp/B00ZV9RDKK/ref=fs_ods_smp_tk";
             var service = new GoodService(this._context.Object, this._mockMapper.Object, this._validator);
             bool isExist = await service.IsItemExistAsync(url);
             Assert.AreEqual(true, isExist);
@@ -200,7 +199,7 @@ namespace MoreForLess.BusinessLogic.Tests.Services
         [Test]
         public async Task GoodService_IsItemExist_InvalidGoodReturnFalse()
         {
-            string url = "https://catalog.onliner.by/notebook/apple/mqd3211";
+            string url = "https://www.amazon.com/dp/B00ZV9RSDF/ref=fs_ods_smp_tk";
             var service = new GoodService(this._context.Object, this._mockMapper.Object, this._validator);
             bool isExist = await service.IsItemExistAsync(url);
             Assert.AreEqual(false, isExist);
@@ -212,7 +211,7 @@ namespace MoreForLess.BusinessLogic.Tests.Services
             int id = 1;
             var service = new GoodService(this._context.Object, this._mockMapper.Object, this._validator);
             var expectedGood = await service.GetGoodByIdAsync(id);
-            Assert.AreEqual("Apple MacBook Air 13", expectedGood.Name);
+            Assert.AreEqual("Fire TV Stick with Alexa Voice Remote Streaming Media Player", expectedGood.Name);
         }
 
         [Test]
@@ -220,7 +219,8 @@ namespace MoreForLess.BusinessLogic.Tests.Services
         {
             var service = new GoodService(this._context.Object, this._mockMapper.Object, this._validator);
             var expectedGood = await service.GetAllGoodsAsync();
-            Assert.AreEqual("Apple MacBook Air 13", expectedGood.FirstOrDefault(u => u.Id == 1).Name);
+            Assert.AreEqual("Fire TV Stick with Alexa Voice Remote Streaming Media Player",
+                expectedGood.FirstOrDefault(u => u.Id == 1).Name);
         }
     }
 }
