@@ -18,6 +18,10 @@ namespace MoreForLess.DataAccess.Configurations
                 .WithRequired()
                 .HasForeignKey(g => g.ShopId);
 
+            this.HasMany(s => s.StoreCategories)
+                .WithRequired()
+                .HasForeignKey(sc => sc.ShopId);
+
             this.Property(s => s.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 

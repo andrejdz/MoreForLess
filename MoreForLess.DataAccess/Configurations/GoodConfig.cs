@@ -10,16 +10,24 @@ namespace MoreForLess.DataAccess.Configurations
     public class GoodConfig : EntityTypeConfiguration<Good>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GoodConfig"/> class.
+        ///     Initializes a new instance of the <see cref="GoodConfig"/> class.
         /// </summary>
         public GoodConfig()
         {
+            this.HasMany(g => g.Comments)
+                .WithOptional()
+                .HasForeignKey(c => c.GoodId);
+
+            this.HasMany(g => g.Scores)
+                .WithOptional()
+                .HasForeignKey(s => s.GoodId);
+
             this.Property(g => g.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(g => g.Name)
                 .IsRequired()
-                .HasMaxLength(250);
+                .HasMaxLength(1000);
 
             this.Property(g => g.Price)
                 .IsRequired();
@@ -29,6 +37,9 @@ namespace MoreForLess.DataAccess.Configurations
 
             this.Property(g => g.LinkOnPicture)
                 .IsOptional();
+
+            this.Property(g => g.CategoryIdOnShop)
+                .IsRequired();
 
             this.Property(g => g.Timestamp)
                 .IsRowVersion();

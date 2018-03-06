@@ -55,17 +55,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\CategoryConfig.cs" />
+    <Compile Include="Configurations\CommentConfig.cs" />
+    <Compile Include="Configurations\ScoreConfig.cs" />
+    <Compile Include="Configurations\StoreCategoryConfig.cs" />
     <Compile Include="Configurations\CurrencyConfig.cs" />
     <Compile Include="Configurations\GoodConfig.cs" />
     <Compile Include="Configurations\ShopConfig.cs" />
     <Compile Include="DataAccessPackage.cs" />
     <Compile Include="EF\ApplicationDbContext.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\Score.cs" />
+    <Compile Include="Entities\StoreCategory.cs" />
+    <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\Good.cs" />
     <Compile Include="Entities\Shop.cs" />
     <Compile Include="Migrations\201803011401068_InitialMigration.cs" />
     <Compile Include="Migrations\201803011401068_InitialMigration.Designer.cs">
       <DependentUpon>201803011401068_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803022128345_AddCategoryId.cs" />
+    <Compile Include="Migrations\201803022128345_AddCategoryId.Designer.cs">
+      <DependentUpon>201803022128345_AddCategoryId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051156210_IncreasedLengthNameGood.cs" />
+    <Compile Include="Migrations\201803051156210_IncreasedLengthNameGood.Designer.cs">
+      <DependentUpon>201803051156210_IncreasedLengthNameGood.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803061736383_AddedNewTables.cs" />
+    <Compile Include="Migrations\201803061736383_AddedNewTables.Designer.cs">
+      <DependentUpon>201803061736383_AddedNewTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +97,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803011401068_InitialMigration.resx">
       <DependentUpon>201803011401068_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803022128345_AddCategoryId.resx">
+      <DependentUpon>201803022128345_AddCategoryId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051156210_IncreasedLengthNameGood.resx">
+      <DependentUpon>201803051156210_IncreasedLengthNameGood.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803061736383_AddedNewTables.resx">
+      <DependentUpon>201803061736383_AddedNewTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

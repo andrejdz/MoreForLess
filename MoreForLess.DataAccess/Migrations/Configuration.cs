@@ -17,10 +17,8 @@ namespace MoreForLess.DataAccess.Migrations
         {
             List<Currency> currencyList = new List<Currency>()
             {
-                new Currency() { Name = "BYN" },
                 new Currency() { Name = "USD" },
-                new Currency() { Name = "EUR" },
-                new Currency() { Name = "RUR" },
+                new Currency() { Name = "EUR" }
             };
 
             foreach (var item in currencyList)
@@ -32,7 +30,7 @@ namespace MoreForLess.DataAccess.Migrations
             List<Shop> shopList = new List<Shop>()
             {
                 new Shop() { Name = "AMAZON" },
-                new Shop() { Name = "EBAY" },
+                new Shop() { Name = "EBAY" }
             };
 
             foreach (var item in shopList)
@@ -41,47 +39,89 @@ namespace MoreForLess.DataAccess.Migrations
                     .AddOrUpdate(s => new { s.Name }, item);
             }
 
-            context.SaveChanges();
-
-            List<Good> goodList = new List<Good>()
+            List<Category> categories = new List<Category>()
             {
-                new Good()
+                new Category()
                 {
-                    Name = "Apple MacBook Pro 15'' Retina",
-                    Price = 4200,
-                    IdGoodOnShop = "notebook/apple/mjlq2",
-                    CurrencyId = 1,
-                    ShopId = 1,
-                    LinkOnProduct = "https://catalog.onliner.by/notebook/apple/mjlq2",
-                    LinkOnPicture = "https://content2.onliner.by/catalog/device/header/721ad26018661faa45979b1c9b048fb1.jpg"
+                    Name = "Electronics",
+                    ParentId = "0"
                 },
-                new Good()
+                new Category()
                 {
-                    Name = "Apple iPhone X 64GB",
-                    Price = 2600,
-                    IdGoodOnShop = "mobile/apple/iphonex",
-                    CurrencyId = 1,
-                    ShopId = 1,
-                    LinkOnProduct = "https://catalog.onliner.by/mobile/apple/iphonex",
-                    LinkOnPicture = "https://content2.onliner.by/catalog/device/header/10f55bb2587a0c163150f8efbf57022f.jpeg"
+                    Name = "Computers and Accessories",
+                    ParentId = "1"
                 },
-                new Good()
-                {
-                    Name = "Pay Card Apple iTunes",
-                    Price = 4200,
-                    IdGoodOnShop = "paymentcard/apple/itunes1000",
-                    CurrencyId = 1,
-                    ShopId = 1,
-                    LinkOnProduct = "https://catalog.onliner.by/paymentcard/apple/itunes1000",
-                    LinkOnPicture = "https://content2.onliner.by/catalog/device/header/a191a76e1779e2f0d66793116e349adb.jpeg"
-                }
             };
 
-            foreach (var item in goodList)
+            foreach (var item in categories)
             {
-                context.Goods
-                    .AddOrUpdate(g => new { g.Name, g.Price, g.IdGoodOnShop, g.LinkOnProduct }, item);
+                context.Categories
+                    .AddOrUpdate(c => new { c.Name, c.ParentId }, item);
             }
+
+            context.SaveChanges();
+
+            List<StoreCategory> storeCategories = new List<StoreCategory>()
+            {
+                new StoreCategory()
+                {
+                    IdAtStore = "172282",
+                    Name = "Electronics",
+                    ParentIdAtStore = "0",
+                    ShopId = 1,
+                    CategoryId = 1
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "493964",
+                    Name = "Categories",
+                    ParentIdAtStore = "172282",
+                    ShopId = 1,
+                    CategoryId = 1
+                },
+            };
+
+            foreach (var item in storeCategories)
+            {
+                context.StoreCategories
+                    .AddOrUpdate(s => new { s.IdAtStore, s.Name, s.ParentIdAtStore, s.ShopId }, item);
+            }
+
+            var good = new Good()
+            {
+                Name = "Apple MacBook Pro 15'' Retina",
+                Price = 420.25M,
+                IdGoodOnShop = "BBBFFFGGGHHH",
+                LinkOnProduct = "LinkOnProduct",
+                LinkOnPicture = "LinkOnPicture",
+                CategoryIdOnShop = "493964",
+                CurrencyId = 1,
+                ShopId = 1,
+                CategoryId = 1
+            };
+
+            context.Goods
+                .AddOrUpdate(g => new { g.Name, g.Price, g.IdGoodOnShop, g.LinkOnProduct, g.CategoryIdOnShop, g.ShopId }, good);
+
+            context.SaveChanges();
+
+            var comment = new Comment
+            {
+                Text = "Very useful product. I'm satisfied",
+                GoodId = 1
+            };
+
+            context.Comments
+                .AddOrUpdate(c => new { c.Text, c.GoodId }, comment);
+
+            //var score = new Score
+            //{
+            //    Value = 4,
+            //    GoodId = 1
+            //};
+
+            //context.Scores
+            //    .AddOrUpdate(score);
 
             context.SaveChanges();
         }
