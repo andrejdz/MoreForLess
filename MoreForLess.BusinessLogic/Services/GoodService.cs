@@ -13,9 +13,7 @@ using MoreForLess.DataAccess.Entities;
 
 namespace MoreForLess.BusinessLogic.Services
 {
-    /// <summary>
-    /// Repository for wishlist goods.
-    /// </summary>
+    /// <inheritdoc />
     public class GoodService : IGoodService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
@@ -47,84 +45,62 @@ namespace MoreForLess.BusinessLogic.Services
             this._goodDomainModelValidator = goodDomainModelValidator;
         }
 
-        /// <summary>
-        ///     Adds new good to database.
-        /// </summary>
-        /// <param name="goodDomainModel">
-        ///     New good which is added to database.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        ///     Throws when shop or currency don't exist in database.
-        ///     Throws when validation is failed.
-        /// </exception>
-        /// <returns>
-        ///     Good item with id defined by database.
-        /// </returns>
-        public async Task<GoodDomainModel> CreateAsync(GoodDomainModel goodDomainModel)
+        /// <inheritdoc />
+        public async Task CreateAsync(IEnumerable<GoodDomainModel> goodDomainModelCollection)
         {
-            try
+            foreach (var goodDomainModel in goodDomainModelCollection)
             {
-                this._goodDomainModelValidator.ValidateAndThrow(goodDomainModel);
+                try
+                {
+                    this._goodDomainModelValidator.ValidateAndThrow(goodDomainModel);
+                }
+                catch (ValidationException ex)
+                {
+                    throw new ArgumentException($"Error when validating {goodDomainModel}.", ex);
+                }
+
+                var good = this._mapper.Map<Good>(goodDomainModel);
+
+                _logger.Info($"Retrieving currency id of {goodDomainModel.CurrencyName}.");
+                int currencyId;
+                try
+                {
+                    var currency = await this._context.Currencies
+                        .SingleAsync(u => u.Name == goodDomainModel.CurrencyName);
+
+                    currencyId = currency.Id;
+                }
+                catch (InvalidOperationException ex)
+                {
+                    throw new ArgumentException("Error when getting currency's id", ex);
+                }
+
+                _logger.Info($"Retrieving shop id of {goodDomainModel.ShopName}.");
+                int shopId;
+                try
+                {
+                    var shop = await this._context.Shops
+                        .SingleAsync(u => u.Name == goodDomainModel.ShopName);
+
+                    shopId = shop.Id;
+                }
+                catch (InvalidOperationException ex)
+                {
+                    throw new ArgumentException("Error when getting shop's id.", ex);
+                }
+
+                good.CurrencyId = currencyId;
+                good.ShopId = shopId;
+
+                this._context.Goods.Add(good);
+
+                _logger.Info($"Saving good item: {good.Name} into database.");
             }
-            catch (ValidationException ex)
-            {
-                throw new ArgumentException($"Error when validating {goodDomainModel}.", ex);
-            }
-
-            var good = this._mapper.Map<Good>(goodDomainModel);
-
-            _logger.Info($"Retrieving currency id of {goodDomainModel.CurrencyName}.");
-            int currencyId;
-            try
-            {
-                var currency = await this._context.Currencies
-                    .SingleAsync(u => u.Name == goodDomainModel.CurrencyName);
-
-                currencyId = currency.Id;
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw new ArgumentException("Error when getting currency's id", ex);
-            }
-
-            _logger.Info($"Retrieving shop id of {goodDomainModel.ShopName}.");
-            int shopId;
-            try
-            {
-                var shop = await this._context.Shops
-                    .SingleAsync(u => u.Name == goodDomainModel.ShopName);
-
-                shopId = shop.Id;
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw new ArgumentException("Error when getting shop's id.", ex);
-            }
-
-            good.CurrencyId = currencyId;
-            good.ShopId = shopId;
-
-            this._context.Goods.Add(good);
-
-            _logger.Info($"Saving good item: {good.Name} into database.");
 
             await this._context.SaveChangesAsync();
-
-            return this._mapper.Map<GoodDomainModel>(good);
         }
 
-        /// <summary>
-        ///     Delete the good from database.
-        /// </summary>
-        /// <param name="id">
-        ///     Id of good which will be deleted.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        ///     Good doesn't exist in database.
-        /// </exception>
-        /// <returns>
-        ///     Representing the asynchronous operation.
-        /// </returns>
+        /// <inheritdoc />
         public async Task DeleteAsync(int id)
         {
             _logger.Info($"Looking for good item by id: {id}.");
@@ -144,18 +120,7 @@ namespace MoreForLess.BusinessLogic.Services
             await this._context.SaveChangesAsync();
         }
 
-        /// <summary>
-        ///     Async method for getting the good by its id.
-        /// </summary>
-        /// <param name="id">
-        ///     Id of good, which is needed to get.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        ///     Throws when good doesn't exist in database.
-        /// </exception>
-        /// <returns>
-        ///     Getting good.
-        /// </returns>
+        /// <inheritdoc />
         public async Task<GoodDomainModel> GetGoodByIdAsync(int id)
         {
             _logger.Info($"Looking for good item by id: {id}.");
@@ -172,12 +137,7 @@ namespace MoreForLess.BusinessLogic.Services
             return this._mapper.Map<GoodDomainModel>(good);
         }
 
-        /// <summary>
-        ///     Async method to get all goods from database.
-        /// </summary>
-        /// <returns>
-        ///     Getting goods.
-        /// </returns>
+        /// <inheritdoc />
         public async Task<IEnumerable<GoodDomainModel>> GetAllGoodsAsync()
         {
             _logger.Info("Retrieving collection of good items.");
@@ -188,30 +148,21 @@ namespace MoreForLess.BusinessLogic.Services
             return returnedGoods;
         }
 
-        /// <summary>
-        ///     Method for checking the good in database by its link.
-        /// </summary>
-        /// <param name="linkOnProduct">
-        ///     Link on good which is needed to check.
-        /// </param>
-        /// <returns>
-        ///     True if the good with such link is exist in database.
-        ///     False if the good is not exist.
-        /// </returns>
-        public async Task<bool> IsItemExistAsync(string linkOnProduct)
+        /// <inheritdoc />
+        public async Task<bool> IsItemExistAsync(string idGoodOnShop)
         {
-            _logger.Info($"Checking whether good item with url: {linkOnProduct} has already been added to database.");
+            _logger.Info($"Checking whether good item with id: {idGoodOnShop} has already been added to database.");
 
             try
             {
-                await this._context.Goods.SingleAsync(item => item.LinkOnProduct == linkOnProduct);
+                await this._context.Goods.SingleAsync(item => item.IdGoodOnShop == idGoodOnShop);
 
-                _logger.Info($"Good with url: {linkOnProduct} exists in database.");
+                _logger.Info($"Good with id: {idGoodOnShop} exists in database.");
                 return true;
             }
             catch (InvalidOperationException)
             {
-                _logger.Info($"Good with url: {linkOnProduct} doesn't exist in database.");
+                _logger.Info($"Good with id: {idGoodOnShop} doesn't exist in database.");
                 return false;
             }
         }

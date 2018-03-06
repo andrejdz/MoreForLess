@@ -5,20 +5,17 @@ using MoreForLess.BusinessLogic.Models;
 namespace MoreForLess.BusinessLogic.Services.Interfaces
 {
     /// <summary>
-    /// Contains methods for wishlist goods
+    /// Contains methods for wish-list goods.
     /// </summary>
     public interface IGoodService
     {
         /// <summary>
         ///     Add new good to DB.
         /// </summary>
-        /// <param name="good">
-        ///     New good which is added to DB.
-        /// </param>
         /// <returns>
         ///     Good item with id defined by database.
         /// </returns>
-        Task<GoodDomainModel> CreateAsync(GoodDomainModel good);
+        Task CreateAsync(IEnumerable<GoodDomainModel> goodList);
 
         /// <summary>
         ///     Delete the good in DB.
@@ -53,13 +50,13 @@ namespace MoreForLess.BusinessLogic.Services.Interfaces
         /// <summary>
         ///     Method for checking the good in database by its link.
         /// </summary>
-        /// <param name="linkOnProduct">
-        ///     Link on good which is needed to check.
+        /// <param name="idGoodOnShop">
+        ///     Good's id at store which is needed to check.
         /// </param>
         /// <returns>
-        ///     True if the good with such link is exist in database.
+        ///     True if the good with id is exist in database.
         ///     False if the good is not exist.
         /// </returns>
-        Task<bool> IsItemExistAsync(string linkOnProduct);
+        Task<bool> IsItemExistAsync(string idGoodOnShop);
     }
 }

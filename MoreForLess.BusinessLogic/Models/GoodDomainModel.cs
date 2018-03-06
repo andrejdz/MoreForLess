@@ -1,7 +1,14 @@
-﻿namespace MoreForLess.BusinessLogic.Models
+﻿using System.Collections.Generic;
+
+namespace MoreForLess.BusinessLogic.Models
 {
     public class GoodDomainModel
     {
+        /// <summary>
+        ///     Gets or sets good's in database.
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         ///     Gets or sets a good's name.
         /// </summary>
@@ -39,8 +46,13 @@
         public string ShopName { get; set; }
 
         /// <summary>
-        ///     Gets or sets an id of good in data base.
+        ///     Gets or sets an category of good at store.
         /// </summary>
-        public int Id { get; set; }
+        public string CategoryIdOnShop { get; set; }
+
+        /// <summary>
+        ///     Gets or sets categories related to this good.
+        /// </summary>
+        public IEnumerable<CategoryDomainModel> Categories { get; set; }
     }
 }

@@ -1,22 +1,28 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 using MoreForLess.BusinessLogic.Models;
 
 namespace MoreForLess.BusinessLogic.Adapters.Interfaces
 {
     /// <summary>
-    ///     Defines methods for getting data from store.
+    ///     Provides opportunity of getting collection of goods.
     /// </summary>
-    public interface IStoreAdapter
+    public interface IStoreAdapter<T>
+        where T : class
     {
         /// <summary>
-        ///     Retrieves item information by provided URLInfo object.
+        ///     Retrieves collection of goods.
         /// </summary>
-        /// <param name="urlInfo">
-        ///     The URLInfo object that describes item location in store.
+        /// <param name="requestParametersModel">
+        ///     Contains request parameters.
         /// </param>
         /// <returns>
-        ///     The ItemInfo object that contains item information or null if information isn't found.
+        ///     Collection of goods.
         /// </returns>
-        Task<ItemInfo> GetItemInfoByURLAsync(URLInfo urlInfo);
+        /// <exception cref="HttpRequestException">
+        ///     Throws when requested data doesn't exist on remote server.
+        /// </exception>
+        Task<IEnumerable<GoodDomainModel>> GetItemInfoByUrlAsync(RequestParametersModel requestParametersModel);
     }
 }

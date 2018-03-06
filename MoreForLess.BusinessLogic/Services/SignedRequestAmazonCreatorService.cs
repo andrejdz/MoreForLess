@@ -4,34 +4,23 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using MoreForLess.BusinessLogic.Models;
 using NLog;
 using MoreForLess.BusinessLogic.Properties;
 using MoreForLess.BusinessLogic.Services.Interfaces;
 
 namespace MoreForLess.BusinessLogic.Services
 {
-    /// <summary>
-    ///     Creator for building a signed request to
-    ///     Amazon's server.
-    /// </summary>
+    /// <inheritdoc />
     public class SignedRequestAmazonCreatorService : ISignedRequestCreatorService<SignedRequestAmazonCreatorService>
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        ///     Creates the signed request with
-        ///     specified parameters
-        /// </summary>
-        /// <param name="id">
-        ///     Id of good at shop.
-        /// </param>
-        /// <returns>
-        ///     Signed request.
-        /// </returns>
-        public string CreateSignedRequest(string id)
+        /// <inheritdoc />
+        public string CreateSignedRequest(RequestParametersModel requestParametersModel)
         {
-            // Creatting unsigned request string.
-            var unsignedRequest = this.CreateUnsignedRequest(id);
+            // Creating unsigned request string.
+            var unsignedRequest = this.CreateUnsignedRequest(requestParametersModel);
 
             _logger.Info("Start creatting signed request.");
 
@@ -74,17 +63,7 @@ namespace MoreForLess.BusinessLogic.Services
             return signedRequest;
         }
 
-        /// <summary>
-        ///     Creates the unsigned request with
-        ///     specified parameters.
-        /// </summary>
-        /// <param name="id">
-        ///     Id of good at shop.
-        /// </param>
-        /// <returns>
-        ///     Unsigned request string.
-        /// </returns>
-        private string CreateUnsignedRequest(string id)
+        private string CreateUnsignedRequest(RequestParametersModel requestParametersModel)
         {
             _logger.Info("Start creatting unsigned request.");
 
@@ -100,11 +79,17 @@ namespace MoreForLess.BusinessLogic.Services
                 { "Service", "AWSECommerceService" },
                 { "AWSAccessKeyId", $"{awsAccessKeyIdPublic}" },
                 { "AssociateTag", $"{associateTag}" },
-                { "Operation", "ItemLookup" },
-                { "ResponseGroup", "Images,ItemAttributes,OfferSummary" },
-                { "ItemId", $"{id}" },
-                { "IdType", "ASIN" },
-                { "Condition", "All" },
+                { "Operation", "ItemSearch" },
+                { "SearchIndex", "Electronics" },
+                { "BrowseNode", "493964" }, // 172282 493964 2102313011
+                { "ResponseGroup", "Images,ItemAttributes,OfferSummary,BrowseNodes" },
+                { "Availability", "Available" },
+                { "Condition", "New" },
+                { "MinPercentageOff", "10" },
+                { "MinimumPrice", $"{requestParametersModel.MinPrice}" },
+                { "MaximumPrice", $"{requestParametersModel.MaxPrice}" },
+                { "Sort", "price" },
+                { "ItemPage", $"{requestParametersModel.Page}"},
                 { "Timestamp", $"{timeStamp}" }
             };
 
@@ -124,19 +109,19 @@ namespace MoreForLess.BusinessLogic.Services
                 parametersEncoded.Add(key, value);
             }
 
-            var unsighnedRequest = new StringBuilder();
-            _logger.Info($"Creatting {nameof(unsighnedRequest)} that contains key=value pairs that have been divided via sign &.");
+            var unsignedRequest = new StringBuilder();
+            _logger.Info($"Creatting {nameof(unsignedRequest)} that contains key=value pairs that have been divided via sign &.");
             foreach (var p in parametersEncoded)
             {
-                unsighnedRequest.Append($"{p.Key}={p.Value}&");
+                unsignedRequest.Append($"{p.Key}={p.Value}&");
             }
 
-            _logger.Info($"{nameof(unsighnedRequest)} has been created successfully.");
-            return unsighnedRequest.ToString().TrimEnd('&');
+            _logger.Info($"{nameof(unsignedRequest)} has been created successfully.");
+            return unsignedRequest.ToString().TrimEnd('&');
         }
 
         /// <summary>
-        ///     Compares two byte arrays have been maded by converting
+        ///     Compares two byte arrays have been made by converting
         ///     strings to byte array.
         /// </summary>
         private class StringComparerByByte : Comparer<string>

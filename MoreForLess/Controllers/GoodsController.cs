@@ -6,7 +6,6 @@ using System.Web.Http;
 using NLog;
 using MoreForLess.BusinessLogic.Models;
 using MoreForLess.BusinessLogic.Services.Interfaces;
-using MoreForLess.Models;
 using Swashbuckle.Swagger.Annotations;
 
 namespace MoreForLess.Controllers
@@ -17,14 +16,14 @@ namespace MoreForLess.Controllers
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private readonly IGoodService _goodService;
-        private readonly IAddingGoodService _addingGoodService;
+        private readonly IAddGoodsService _addUpdateGoodsService;
 
         public GoodsController(
             IGoodService goodService,
-            IAddingGoodService addingGoodService)
+            IAddGoodsService addUpdateGoodsService)
         {
             this._goodService = goodService;
-            this._addingGoodService = addingGoodService;
+            this._addUpdateGoodsService = addUpdateGoodsService;
         }
 
         /// <summary>
@@ -91,25 +90,26 @@ namespace MoreForLess.Controllers
         }
 
         /// <summary>
-        ///     Creates new good.
+        ///     Start update good's data into database.
         /// </summary>
         /// <param name="request">
         ///     Url of good.
         /// </param>
+        /// <param name="page"></param>
         /// <returns>
         ///     Http result.
         /// </returns>
         [Route("")]
-        [SwaggerResponse(HttpStatusCode.Created, type: typeof(GoodDomainModel))]
+        [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public async Task<IHttpActionResult> Post([FromBody]GoodUrlFromRequestBody request)
+        public async Task<IHttpActionResult> Post()
         {
-            _logger.Info($"Start process of adding good to database.");
-            GoodDomainModel goodDomainModel;
+            _logger.Info($"Start process of adding good's data to database.");
+
             try
             {
-                goodDomainModel = await this._addingGoodService.ProcessAsync(request.Url);
+                await this._addUpdateGoodsService.AddGoodsAsync();
             }
             catch (ArgumentException ex)
             {
@@ -122,9 +122,9 @@ namespace MoreForLess.Controllers
                 return this.InternalServerError();
             }
 
-            string messageIfSuccess = $"Good has been successfully added to data base.";
+            string messageIfSuccess = $"Goods have been successfully added.";
             _logger.Info(messageIfSuccess);
-            return this.Created("Todo: Add location.", goodDomainModel);
+            return this.Ok(messageIfSuccess);
         }
 
         /// <summary>

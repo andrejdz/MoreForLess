@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using MoreForLess.BusinessLogic.Helpers;
 using MoreForLess.BusinessLogic.Models;
 
 namespace MoreForLess.BusinessLogic.Validation
@@ -14,27 +13,11 @@ namespace MoreForLess.BusinessLogic.Validation
 
             this.RuleFor(g => g.Price)
                 .GreaterThan(decimal.Zero)
-                .WithMessage($"Price less than or equal to zero.");
+                .WithMessage("Price less than or equal to zero.");
 
             this.RuleFor(g => g.LinkOnProduct)
                 .NotEmpty()
-                .WithMessage("Good's url is null, empty or contains only white-space characters.")
-                .DependentRules(() =>
-                {
-                    this.RuleFor(g => g.LinkOnProduct)
-                        .Must(UrlValidator.CheckUrl)
-                        .WithMessage("Good's url has invalid format.");
-                });
-
-            this.RuleFor(g => g.LinkOnPicture)
-                .NotEmpty()
-                .WithMessage("Image's url is null, empty or contains only white-space characters.")
-                .DependentRules(() =>
-                {
-                    this.RuleFor(g => g.LinkOnPicture)
-                        .Must(UrlValidator.CheckUrl)
-                        .WithMessage("Image's url has invalid format.");
-                });
+                .WithMessage("Good's url is null, empty or contains only white-space characters.");
 
             this.RuleFor(g => g.IdGoodOnShop)
                 .NotEmpty()
@@ -47,6 +30,10 @@ namespace MoreForLess.BusinessLogic.Validation
             this.RuleFor(g => g.CurrencyName)
                 .NotEmpty()
                 .WithMessage("Currency is null, empty or contains only white-space characters.");
+
+            this.RuleFor(g => g.CategoryIdOnShop)
+                .NotEmpty()
+                .WithMessage("Category id at store is null, empty or contains only white-space characters.");
         }
     }
 }

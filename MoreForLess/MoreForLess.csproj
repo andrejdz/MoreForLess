@@ -159,12 +159,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Infrastructure\FluentValidationFactory.cs" />
-    <Compile Include="Models\Validation\GoodUrlFromRequestBodyValidator.cs" />
     <Compile Include="Filters\ValidateModelStateFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\GoodUrlFromRequestBody.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

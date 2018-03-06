@@ -1,5 +1,5 @@
-﻿using MoreForLess.BusinessLogic.Infrastructure;
-using MoreForLess.BusinessLogic.Infrastructure.Interfaces;
+﻿using MoreForLess.BusinessLogic.Adapters;
+using MoreForLess.BusinessLogic.Adapters.Interfaces;
 using MoreForLess.BusinessLogic.Services;
 using MoreForLess.BusinessLogic.Services.Interfaces;
 using SimpleInjector;
@@ -21,11 +21,9 @@ namespace MoreForLess.BusinessLogic
         public void RegisterServices(Container container)
         {
             container.Register<IGoodService, GoodService>(Lifestyle.Scoped);
-            container.Register<IAddingGoodService, AddingGoodService>(Lifestyle.Scoped);
-            container.Register<IGoodDomainModelCreatorService, GoodDomainModelCreatorService>(Lifestyle.Scoped);
-            container.Register<IURLParser, URLParser>(Lifestyle.Scoped);
-            container.Register<IAdapterResolver, AdapterResolver>(Lifestyle.Scoped);
+            container.Register<IAddGoodsService, AddGoodsService>(Lifestyle.Scoped);
             container.Register<ISignedRequestCreatorService<SignedRequestAmazonCreatorService>, SignedRequestAmazonCreatorService>(Lifestyle.Scoped);
+            container.Register<IStoreAdapter<AmazonAdapter>, AmazonAdapter>(Lifestyle.Scoped);
         }
     }
 }

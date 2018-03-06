@@ -1,4 +1,6 @@
-﻿namespace MoreForLess.BusinessLogic.Services.Interfaces
+﻿using MoreForLess.BusinessLogic.Models;
+
+namespace MoreForLess.BusinessLogic.Services.Interfaces
 {
     /// <summary>
     ///     Contains contract of method that should create signed request.
@@ -13,12 +15,12 @@
         ///     Creates the signed request with
         ///     specified parameters
         /// </summary>
-        /// <param name="id">
-        ///     Id of good at shop.
+        /// <param name="requestParametersModel">
+        ///     Contains request parameters.
         /// </param>
         /// <returns>
         ///     Signed request.
         /// </returns>
-        string CreateSignedRequest(string id);
+        string CreateSignedRequest(RequestParametersModel requestParametersModel);
     }
 }

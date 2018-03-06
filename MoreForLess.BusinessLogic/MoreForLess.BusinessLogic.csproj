@@ -87,32 +87,26 @@
   <ItemGroup>
     <Compile Include="Adapters\AmazonAdapter.cs" />
     <Compile Include="Adapters\Interfaces\IStoreAdapter.cs" />
-    <Compile Include="Helpers\UrlValidator.cs" />
-    <Compile Include="Infrastructure\AdapterResolver.cs" />
-    <Compile Include="Infrastructure\Interfaces\IAdapterResolver.cs" />
-    <Compile Include="Infrastructure\Interfaces\IURLParser.cs" />
-    <Compile Include="Infrastructure\URLParser.cs" />
-    <Compile Include="Models\ItemInfo.cs" />
-    <Compile Include="Models\URLInfo.cs" />
+    <Compile Include="Models\CategoryDomainModel.cs" />
+    <Compile Include="Models\RequestParametersModel.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Services\Interfaces\IAddingGoodService.cs" />
     <Compile Include="Services\Interfaces\IGoodService.cs" />
-    <Compile Include="Services\GoodDomainModelCreatorService.cs" />
-    <Compile Include="Services\Interfaces\IGoodDomainModelCreatorService.cs" />
+    <Compile Include="Services\AddGoodsService.cs" />
+    <Compile Include="Services\Interfaces\IAddGoodsService.cs" />
     <Compile Include="Services\Interfaces\ISignedRequestCreatorService.cs" />
     <Compile Include="Services\SignedRequestAmazonCreatorService.cs" />
+    <Compile Include="Validation\CategoryDomainModelValidator.cs" />
     <Compile Include="Validation\GoodDomainModelValidator.cs" />
     <Compile Include="Models\GoodDomainModel.cs" />
     <Compile Include="BllMappingProfile.cs" />
     <Compile Include="BusinessLayerPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AddingGoodService.cs" />
     <Compile Include="Services\GoodService.cs" />
-    <Compile Include="Validation\URLInfoValidator.cs" />
+    <Compile Include="Validation\RequestParameterModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
