@@ -103,13 +103,13 @@ namespace MoreForLess.Controllers
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public async Task<IHttpActionResult> Post()
+        public async Task<IHttpActionResult> Post(int minPrice)
         {
             _logger.Info($"Start process of adding good's data to database.");
 
             try
             {
-                await this._addUpdateGoodsService.AddGoodsAsync();
+                await this._addUpdateGoodsService.AddGoodsAsync(minPrice);
             }
             catch (ArgumentException ex)
             {

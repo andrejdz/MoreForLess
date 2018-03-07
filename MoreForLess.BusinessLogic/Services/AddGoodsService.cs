@@ -49,10 +49,10 @@ namespace MoreForLess.BusinessLogic.Services
         }
 
         /// <inheritdoc />
-        public async Task AddGoodsAsync()
+        public async Task AddGoodsAsync(int minPrice)
         {
             // Looping with step that equals to 500 (5.00 dollar).
-            for (int minPrice = 1000; minPrice <= 100_000; minPrice += 500)
+            for (; minPrice <= 100_000; minPrice += 500)
             {
                 // Dividing price range into five equal ranges (step 50 or 0.5 dollar).
                 for (int page = 1, minPriceDivide = minPrice, maxPrice = minPrice + 50;
