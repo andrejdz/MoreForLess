@@ -48,7 +48,92 @@ namespace MoreForLess.DataAccess.Migrations
                 },
                 new Category()
                 {
+                    Name = "Accessories and Supplies",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Camera and Photo",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Car and Vehicle Electronics",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Cell Phones and Accessories",
+                    ParentId = "1"
+                },
+                new Category()
+                {
                     Name = "Computers and Accessories",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Electronics Warranties",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "GPS and Navigation",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Headphones",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Home Audio",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Office Electronics",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Portable Audio and Video",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Security and Surveillance",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Service Plans",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Television and Video",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Video Game Consoles and Accessories",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Video Projectors",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "Wearable Technology",
+                    ParentId = "1"
+                },
+                new Category()
+                {
+                    Name = "eBook Readers and Accessories",
                     ParentId = "1"
                 },
             };
@@ -84,126 +169,144 @@ namespace MoreForLess.DataAccess.Migrations
                     IdAtStore = "281407",
                     Name = "Accessories & Supplies",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 2
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "502394",
                     Name = "Camera & Photo",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 3
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "3248684011",
                     Name = "Car & Vehicle Electronics",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 4
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "2811119011",
                     Name = "Cell Phones & Accessories",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 5
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "541966",
                     Name = "Computers & Accessories",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 6
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "2242348011",
                     Name = "Electronics Warranties",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 7
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "172526",
                     Name = "GPS & Navigation",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 8
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "172541",
                     Name = "Headphones",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 9
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "667846011",
                     Name = "Home Audio",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 10
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "172574",
                     Name = "Office Electronics",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 11
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "172623",
                     Name = "Portable Audio & Video",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 12
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "524136",
                     Name = "Security & Surveillance",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 13
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "16285901",
                     Name = "Service Plans",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 14
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "1266092011",
                     Name = "Television & Video",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 15
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "7926841011",
                     Name = "Video Game Consoles & Accessories",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 16
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "300334",
                     Name = "Video Projectors",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 17
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "10048700011",
                     Name = "Wearable Technology",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 18
                 },
                 new StoreCategory()
                 {
                     IdAtStore = "2642125011",
                     Name = "eBook Readers & Accessories",
                     ShopId = 1,
-                    ParentIdAtStore = "493964"
+                    ParentIdAtStore = "493964",
+                    CategoryId = 19
                 },
             };
 
