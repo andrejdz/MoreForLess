@@ -48,6 +48,7 @@ namespace MoreForLess.BusinessLogic.Services
         /// <inheritdoc />
         public async Task CreateAsync(IEnumerable<GoodDomainModel> goodDomainModelCollection)
         {
+            List<Good> goods = new List<Good>();
             foreach (var goodDomainModel in goodDomainModelCollection)
             {
                 try
@@ -92,10 +93,12 @@ namespace MoreForLess.BusinessLogic.Services
                 good.CurrencyId = currencyId;
                 good.ShopId = shopId;
 
-                this._context.Goods.Add(good);
-
-                _logger.Info($"Saving good item: {good.Name} into database.");
+                _logger.Info($"Adding good item: {good.Name} to goods collection.");
+                goods.Add(good);
             }
+
+            _logger.Info($"Saving goods item into database.");
+            this._context.Goods.AddRange(goods);
 
             await this._context.SaveChangesAsync();
         }

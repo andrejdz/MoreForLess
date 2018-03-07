@@ -21,7 +21,9 @@ namespace MoreForLess.BusinessLogic
         public void RegisterServices(Container container)
         {
             container.Register<IGoodService, GoodService>(Lifestyle.Scoped);
+            container.Register<ICategoryService, CategoryService>(Lifestyle.Scoped);
             container.Register<IAddGoodsService, AddGoodsService>(Lifestyle.Scoped);
+
             container.Register<ISignedRequestCreatorService<SignedRequestAmazonCreatorService>, SignedRequestAmazonCreatorService>(Lifestyle.Scoped);
             container.Register<IStoreAdapter<AmazonAdapter>, AmazonAdapter>(Lifestyle.Scoped);
         }

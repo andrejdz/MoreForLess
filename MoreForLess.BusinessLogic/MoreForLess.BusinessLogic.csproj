@@ -88,12 +88,15 @@
     <Compile Include="Adapters\AmazonAdapter.cs" />
     <Compile Include="Adapters\Interfaces\IStoreAdapter.cs" />
     <Compile Include="Models\CategoryDomainModel.cs" />
+    <Compile Include="Models\Comparers\CategoryEqualityComparer.cs" />
     <Compile Include="Models\RequestParametersModel.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\Interfaces\ICategoryService.cs" />
     <Compile Include="Services\Interfaces\IGoodService.cs" />
     <Compile Include="Services\AddGoodsService.cs" />
     <Compile Include="Services\Interfaces\IAddGoodsService.cs" />

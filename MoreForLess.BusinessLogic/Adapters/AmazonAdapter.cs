@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using MoreForLess.BusinessLogic.Adapters.Interfaces;
 using MoreForLess.BusinessLogic.Models;
+using MoreForLess.BusinessLogic.Models.Comparers;
 using MoreForLess.BusinessLogic.Services;
 using MoreForLess.BusinessLogic.Services.Interfaces;
 
@@ -38,7 +39,7 @@ namespace MoreForLess.BusinessLogic.Adapters
         {
             var signedRequest = this._signedRequestCreatorService.CreateSignedRequest(requestParametersModel);
 
-            await Task.Delay(1000);
+            //await Task.Delay(1000);
 
             string responseMessage;
             using (var client = new HttpClient())
@@ -295,7 +296,7 @@ namespace MoreForLess.BusinessLogic.Adapters
                 var categoryDomainModel = this.GetParentIdAtStore(categoryDomainModels, category);
             }
 
-            return categoryDomainModels;
+            return categoryDomainModels.Distinct(new CategoryEqualityComparer());
         }
 
         /// <summary>
@@ -337,7 +338,9 @@ namespace MoreForLess.BusinessLogic.Adapters
                 var categoryDomainModel = new CategoryDomainModel
                 {
                     IdAtStore = category.Element(this._xns + "BrowseNodeId").Value,
-                    Name = category.Element(this._xns + "Name").Value,
+                    Name = category.Element(this._xns + "Name") == null
+                        ? "EmptyNameOfCategory"
+                        : category.Element(this._xns + "Name").Value,
                     ParentIdAtStore = "0"
                 };
 

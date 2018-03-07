@@ -79,6 +79,132 @@ namespace MoreForLess.DataAccess.Migrations
                     ShopId = 1,
                     CategoryId = 1
                 },
+                new StoreCategory()
+                {
+                    IdAtStore = "281407",
+                    Name = "Accessories & Supplies",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "502394",
+                    Name = "Camera & Photo",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "3248684011",
+                    Name = "Car & Vehicle Electronics",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "2811119011",
+                    Name = "Cell Phones & Accessories",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "541966",
+                    Name = "Computers & Accessories",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "2242348011",
+                    Name = "Electronics Warranties",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "172526",
+                    Name = "GPS & Navigation",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "172541",
+                    Name = "Headphones",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "667846011",
+                    Name = "Home Audio",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "172574",
+                    Name = "Office Electronics",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "172623",
+                    Name = "Portable Audio & Video",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "524136",
+                    Name = "Security & Surveillance",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "16285901",
+                    Name = "Service Plans",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "1266092011",
+                    Name = "Television & Video",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "7926841011",
+                    Name = "Video Game Consoles & Accessories",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "300334",
+                    Name = "Video Projectors",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "10048700011",
+                    Name = "Wearable Technology",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
+                new StoreCategory()
+                {
+                    IdAtStore = "2642125011",
+                    Name = "eBook Readers & Accessories",
+                    ShopId = 1,
+                    ParentIdAtStore = "493964"
+                },
             };
 
             foreach (var item in storeCategories)
