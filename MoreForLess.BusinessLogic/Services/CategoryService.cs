@@ -46,9 +46,23 @@ namespace MoreForLess.BusinessLogic.Services
 
         /// <inheritdoc />
         public async Task CreateAsync(
-            IEnumerable<CategoryDomainModel> categoryDomainModels,
+            IReadOnlyCollection<CategoryDomainModel> categoryDomainModels,
             string shopName)
         {
+            _logger.Info($"Retrieving shop id of {shopName}.");
+            int shopId;
+            try
+            {
+                var shop = await this._context.Shops
+                    .SingleAsync(u => u.Name == shopName);
+
+                shopId = shop.Id;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new ArgumentException("Error when getting shop's id.", ex);
+            }
+
             List<StoreCategory> storeCategories = new List<StoreCategory>();
             foreach (var categoryDomainModel in categoryDomainModels)
             {
@@ -62,20 +76,6 @@ namespace MoreForLess.BusinessLogic.Services
                 }
 
                 var storeCategory = this._mapper.Map<StoreCategory>(categoryDomainModel);
-
-                _logger.Info($"Retrieving shop id of {shopName}.");
-                int shopId;
-                try
-                {
-                    var shop = await this._context.Shops
-                        .SingleAsync(u => u.Name == shopName);
-
-                    shopId = shop.Id;
-                }
-                catch (InvalidOperationException ex)
-                {
-                    throw new ArgumentException("Error when getting shop's id.", ex);
-                }
 
                 storeCategory.ShopId = shopId;
 

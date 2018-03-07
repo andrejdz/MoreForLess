@@ -15,7 +15,7 @@ namespace MoreForLess.BusinessLogic.Services.Interfaces
         /// <returns>
         ///     Good item with id defined by database.
         /// </returns>
-        Task CreateAsync(IEnumerable<GoodDomainModel> goodList);
+        Task CreateAsync(IReadOnlyCollection<GoodDomainModel> goodList);
 
         /// <summary>
         ///     Delete the good in DB.

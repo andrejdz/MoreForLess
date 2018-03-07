@@ -35,7 +35,7 @@ namespace MoreForLess.BusinessLogic.Adapters
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<GoodDomainModel>> GetItemInfoByUrlAsync(RequestParametersModel requestParametersModel)
+        public async Task<IReadOnlyCollection<GoodDomainModel>> GetItemInfoByUrlAsync(RequestParametersModel requestParametersModel)
         {
             var signedRequest = this._signedRequestCreatorService.CreateSignedRequest(requestParametersModel);
 
@@ -65,7 +65,7 @@ namespace MoreForLess.BusinessLogic.Adapters
         /// <exception cref="InvalidOperationException">
         ///     Throws when cannot get good's info from xml.
         /// </exception>
-        private IEnumerable<GoodDomainModel> Parse(string data)
+        private IReadOnlyCollection<GoodDomainModel> Parse(string data)
         {
             if (data == null)
             {
@@ -89,7 +89,7 @@ namespace MoreForLess.BusinessLogic.Adapters
                 throw new ArgumentException("Error when getting good's info from xml.", ex);
             }
 
-            List<GoodDomainModel> goodDomainModelCollection = new List<GoodDomainModel>();
+            List<GoodDomainModel> goodDomainModels = new List<GoodDomainModel>();
             foreach (var item in itemCollection)
             {
                 IEnumerable<CategoryDomainModel> categoryDomainModels;
@@ -192,10 +192,10 @@ namespace MoreForLess.BusinessLogic.Adapters
                     Categories = categoryDomainModels
                 };
 
-                goodDomainModelCollection.Add(goodDomainModel);
+                goodDomainModels.Add(goodDomainModel);
             }
 
-            return goodDomainModelCollection;
+            return goodDomainModels;
         }
 
         private decimal GetPrice(XElement item)
@@ -339,7 +339,7 @@ namespace MoreForLess.BusinessLogic.Adapters
                 {
                     IdAtStore = category.Element(this._xns + "BrowseNodeId").Value,
                     Name = category.Element(this._xns + "Name") == null
-                        ? "EmptyNameOfCategory"
+                        ? "Other category"
                         : category.Element(this._xns + "Name").Value,
                     ParentIdAtStore = "0"
                 };

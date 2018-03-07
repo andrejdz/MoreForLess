@@ -23,6 +23,6 @@ namespace MoreForLess.BusinessLogic.Adapters.Interfaces
         /// <exception cref="HttpRequestException">
         ///     Throws when requested data doesn't exist on remote server.
         /// </exception>
-        Task<IEnumerable<GoodDomainModel>> GetItemInfoByUrlAsync(RequestParametersModel requestParametersModel);
+        Task<IReadOnlyCollection<GoodDomainModel>> GetItemInfoByUrlAsync(RequestParametersModel requestParametersModel);
     }
 }

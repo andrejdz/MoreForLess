@@ -19,7 +19,7 @@ namespace MoreForLess.BusinessLogic.Services.Interfaces
         ///     Shop's name.
         /// </param>
         Task CreateAsync(
-            IEnumerable<CategoryDomainModel> categories,
+            IReadOnlyCollection<CategoryDomainModel> categories,
             string shopName);
 
         /// <summary>

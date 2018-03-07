@@ -46,10 +46,40 @@ namespace MoreForLess.BusinessLogic.Services
         }
 
         /// <inheritdoc />
-        public async Task CreateAsync(IEnumerable<GoodDomainModel> goodDomainModelCollection)
+        public async Task CreateAsync(IReadOnlyCollection<GoodDomainModel> goodDomainModels)
         {
+            var goodDomainModelFirst = goodDomainModels.First();
+
+            _logger.Info($"Retrieving currency id of {goodDomainModelFirst.CurrencyName}.");
+            int currencyId;
+            try
+            {
+                var currency = await this._context.Currencies
+                    .SingleAsync(u => u.Name == goodDomainModelFirst.CurrencyName);
+
+                currencyId = currency.Id;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new ArgumentException("Error when getting currency's id", ex);
+            }
+
+            _logger.Info($"Retrieving shop id of {goodDomainModelFirst.ShopName}.");
+            int shopId;
+            try
+            {
+                var shop = await this._context.Shops
+                    .SingleAsync(u => u.Name == goodDomainModelFirst.ShopName);
+
+                shopId = shop.Id;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new ArgumentException("Error when getting shop's id.", ex);
+            }
+
             List<Good> goods = new List<Good>();
-            foreach (var goodDomainModel in goodDomainModelCollection)
+            foreach (var goodDomainModel in goodDomainModels)
             {
                 try
                 {
@@ -61,34 +91,6 @@ namespace MoreForLess.BusinessLogic.Services
                 }
 
                 var good = this._mapper.Map<Good>(goodDomainModel);
-
-                _logger.Info($"Retrieving currency id of {goodDomainModel.CurrencyName}.");
-                int currencyId;
-                try
-                {
-                    var currency = await this._context.Currencies
-                        .SingleAsync(u => u.Name == goodDomainModel.CurrencyName);
-
-                    currencyId = currency.Id;
-                }
-                catch (InvalidOperationException ex)
-                {
-                    throw new ArgumentException("Error when getting currency's id", ex);
-                }
-
-                _logger.Info($"Retrieving shop id of {goodDomainModel.ShopName}.");
-                int shopId;
-                try
-                {
-                    var shop = await this._context.Shops
-                        .SingleAsync(u => u.Name == goodDomainModel.ShopName);
-
-                    shopId = shop.Id;
-                }
-                catch (InvalidOperationException ex)
-                {
-                    throw new ArgumentException("Error when getting shop's id.", ex);
-                }
 
                 good.CurrencyId = currencyId;
                 good.ShopId = shopId;
@@ -144,7 +146,7 @@ namespace MoreForLess.BusinessLogic.Services
         public async Task<IEnumerable<GoodDomainModel>> GetAllGoodsAsync()
         {
             _logger.Info("Retrieving collection of good items.");
-            List<Good> goods = await this._context.Goods.ToListAsync();
+            IEnumerable<Good> goods = await this._context.Goods.ToListAsync();
 
             var returnedGoods = goods.Select(good => this._mapper.Map<GoodDomainModel>(good));
 
