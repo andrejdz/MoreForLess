@@ -19,7 +19,7 @@ namespace MoreForLess.DataAccess.Configurations
                 .HasForeignKey(sc => sc.CategoryId);
 
             this.HasMany(c => c.Goods)
-                .WithRequired()
+                .WithOptional()
                 .HasForeignKey(g => g.CategoryId);
 
             this.Property(c => c.Id)

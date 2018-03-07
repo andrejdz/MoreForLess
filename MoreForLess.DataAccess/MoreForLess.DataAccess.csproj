@@ -87,6 +87,10 @@
     <Compile Include="Migrations\201803061736383_AddedNewTables.Designer.cs">
       <DependentUpon>201803061736383_AddedNewTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803062154296_TemporaryMadeCategoryIdNullable.cs" />
+    <Compile Include="Migrations\201803062154296_TemporaryMadeCategoryIdNullable.Designer.cs">
+      <DependentUpon>201803062154296_TemporaryMadeCategoryIdNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -106,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803061736383_AddedNewTables.resx">
       <DependentUpon>201803061736383_AddedNewTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803062154296_TemporaryMadeCategoryIdNullable.resx">
+      <DependentUpon>201803062154296_TemporaryMadeCategoryIdNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
