@@ -12,7 +12,7 @@ namespace MoreForLess.BusinessLogic.Models.Comparers
                 return true;
             else if (x == null | y == null)
                 return false;
-            else if (x.IdAtStore.Trim().ToUpperInvariant() == y.IdAtStore.Trim().ToUpperInvariant())
+            else if (x.IdAtStore.Trim() == y.IdAtStore.Trim())
                 return true;
             else
                 return false;
@@ -21,9 +21,7 @@ namespace MoreForLess.BusinessLogic.Models.Comparers
         /// <inheritdoc />
         public int GetHashCode(CategoryDomainModel obj)
         {
-            var hCode = obj.IdAtStore.Length ^ obj.Name.Length ^ obj.ParentIdAtStore.Length;
-
-            return hCode.GetHashCode();
+            return obj.IdAtStore.GetHashCode();
         }
     }
 }
