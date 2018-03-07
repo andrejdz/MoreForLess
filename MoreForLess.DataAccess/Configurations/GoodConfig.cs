@@ -32,6 +32,9 @@ namespace MoreForLess.DataAccess.Configurations
             this.Property(g => g.Price)
                 .IsRequired();
 
+            this.Property(g => g.IdGoodOnShop)
+                .IsRequired();
+
             this.Property(g => g.LinkOnProduct)
                 .IsRequired();
 
