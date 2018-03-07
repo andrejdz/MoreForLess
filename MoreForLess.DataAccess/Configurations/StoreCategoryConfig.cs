@@ -18,6 +18,9 @@ namespace MoreForLess.DataAccess.Configurations
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .HasColumnOrder(0);
 
+            this.HasIndex(c => c.IdAtStore)
+                .IsUnique();
+
             this.Property(c => c.IdAtStore)
                 .IsRequired()
                 .HasMaxLength(50);
