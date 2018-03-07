@@ -293,7 +293,7 @@ namespace MoreForLess.BusinessLogic.Adapters
                 }
 
                 // Getting all categories related to current good.
-                var categoryDomainModel = this.GetParentIdAtStore(categoryDomainModels, category);
+                this.GetParentIdAtStore(categoryDomainModels, category);
             }
 
             return categoryDomainModels.Distinct(new CategoryEqualityComparer());
