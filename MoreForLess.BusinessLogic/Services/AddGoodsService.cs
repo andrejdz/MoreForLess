@@ -51,15 +51,18 @@ namespace MoreForLess.BusinessLogic.Services
         /// <inheritdoc />
         public async Task AddGoodsAsync()
         {
-            // Looping with step that equals to 100 (1.00 dollar).
-            for (int minPrice = 4600, maxPrice = 4700; maxPrice <= 50_000; minPrice += 100, maxPrice += 100)
+            // Looping with step that equals to 500 (5.00 dollar).
+            for (int minPrice = 1000; minPrice <= 100_000; minPrice += 500)
             {
-                for (int page = 1; page <= 10; page++)
+                // Dividing price range into five equal ranges (step 50 or 0.5 dollar).
+                for (int page = 1, minPriceDivide = minPrice, maxPrice = minPrice + 50;
+                    page <= 10;
+                    page++, minPriceDivide += 50, maxPrice += 50)
                 {
                     var requestParametersModel = new RequestParametersModel
                     {
                         Page = page,
-                        MinPrice = minPrice,
+                        MinPrice = minPriceDivide,
                         MaxPrice = maxPrice
                     };
                     try
@@ -73,10 +76,10 @@ namespace MoreForLess.BusinessLogic.Services
                     }
 
                     // Getting good's info from server and adding to collection.
-                    IEnumerable<GoodDomainModel> goodDomainModels;
+                    IReadOnlyCollection<GoodDomainModel> goodDomainModels;
                     try
                     {
-                        goodDomainModels = (await this._amazonAdapter.GetItemInfoByUrlAsync(requestParametersModel)).ToList();
+                        goodDomainModels = await this._amazonAdapter.GetItemInfoByUrlAsync(requestParametersModel);
                     }
                     catch (HttpRequestException ex)
                     {
@@ -90,14 +93,14 @@ namespace MoreForLess.BusinessLogic.Services
 
                     // Checking if good already exist into database.
                     // Creating new collection without duplicates.
-                    var goodDomainModelsDeletedDuplicates = (await this.CheckExistenceGoodInDb(goodDomainModels)).ToList();
+                    var goodDomainModelsDeletedDuplicates = await this.CheckExistenceGoodInDb(goodDomainModels);
 
                     // Checking if category already exist into database.
                     // Creating new collection without duplicates.
-                    IEnumerable<CategoryDomainModel> categoryDomainModelsDeletedDuplicates = new List<CategoryDomainModel>();
+                    IReadOnlyCollection<CategoryDomainModel> categoryDomainModelsDeletedDuplicates = new List<CategoryDomainModel>();
                     foreach (var goodDomainModel in goodDomainModels)
                     {
-                        categoryDomainModelsDeletedDuplicates = (await this.CheckExistenceCategoryInDb(goodDomainModel.Categories)).ToList();
+                        categoryDomainModelsDeletedDuplicates = await this.CheckExistenceCategoryInDb(goodDomainModel.Categories);
                     }
 
                     // Adding collection of goods to database.
@@ -117,7 +120,8 @@ namespace MoreForLess.BusinessLogic.Services
             }
         }
 
-        private async Task<IEnumerable<GoodDomainModel>> CheckExistenceGoodInDb(IEnumerable<GoodDomainModel> goodDomainModels)
+        private async Task<IReadOnlyCollection<GoodDomainModel>> CheckExistenceGoodInDb(
+            IReadOnlyCollection<GoodDomainModel> goodDomainModels)
         {
             var goodDomainModelsDeletedDuplicates = new List<GoodDomainModel>();
             foreach (var good in goodDomainModels)
@@ -131,7 +135,8 @@ namespace MoreForLess.BusinessLogic.Services
             return goodDomainModelsDeletedDuplicates;
         }
 
-        private async Task<IEnumerable<CategoryDomainModel>> CheckExistenceCategoryInDb(IEnumerable<CategoryDomainModel> categoryDomainModels)
+        private async Task<IReadOnlyCollection<CategoryDomainModel>> CheckExistenceCategoryInDb(
+            IEnumerable<CategoryDomainModel> categoryDomainModels)
         {
             var categoryDomainModelsDeletedDuplicates = new List<CategoryDomainModel>();
             foreach (var category in categoryDomainModels)
