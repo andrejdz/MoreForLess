@@ -2,8 +2,10 @@
 
 namespace MoreForLess.BusinessLogic.Models.Comparers
 {
+    /// <inheritdoc />
     public class CategoryEqualityComparer : IEqualityComparer<CategoryDomainModel>
     {
+        /// <inheritdoc />
         public bool Equals(CategoryDomainModel x, CategoryDomainModel y)
         {
             if (x == null && y == null)
@@ -16,6 +18,7 @@ namespace MoreForLess.BusinessLogic.Models.Comparers
                 return false;
         }
 
+        /// <inheritdoc />
         public int GetHashCode(CategoryDomainModel obj)
         {
             var hCode = obj.IdAtStore.Length ^ obj.Name.Length ^ obj.ParentIdAtStore.Length;
