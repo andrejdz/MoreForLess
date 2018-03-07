@@ -7,6 +7,7 @@ using FluentValidation;
 using MoreForLess.BusinessLogic.Adapters;
 using MoreForLess.BusinessLogic.Adapters.Interfaces;
 using MoreForLess.BusinessLogic.Models;
+using MoreForLess.BusinessLogic.Models.Comparers;
 using MoreForLess.BusinessLogic.Services.Interfaces;
 
 namespace MoreForLess.BusinessLogic.Services
@@ -52,7 +53,7 @@ namespace MoreForLess.BusinessLogic.Services
         public async Task AddGoodsAsync(int minPrice)
         {
             // Looping with step that equals to 500 (5.00 dollar).
-            for (; minPrice <= 100_000; minPrice += 500)
+            for (; minPrice <= 50_000; minPrice += 500)
             {
                 // Dividing price range into five equal ranges (step 50 or 0.5 dollar).
                 for (int page = 1, minPriceDivide = minPrice, maxPrice = minPrice + 50;
@@ -97,11 +98,8 @@ namespace MoreForLess.BusinessLogic.Services
 
                     // Checking if category already exist into database.
                     // Creating new collection without duplicates.
-                    IReadOnlyCollection<CategoryDomainModel> categoryDomainModelsDeletedDuplicates = new List<CategoryDomainModel>();
-                    foreach (var goodDomainModel in goodDomainModels)
-                    {
-                        categoryDomainModelsDeletedDuplicates = await this.CheckExistenceCategoryInDb(goodDomainModel.Categories);
-                    }
+                    IReadOnlyCollection<CategoryDomainModel> categoryDomainModelsDeletedDuplicates = 
+                        await this.CheckExistenceCategoryInDb(goodDomainModels.SelectMany(g => g.Categories));
 
                     // Adding collection of goods to database.
                     if (goodDomainModelsDeletedDuplicates.Any())
@@ -138,8 +136,10 @@ namespace MoreForLess.BusinessLogic.Services
         private async Task<IReadOnlyCollection<CategoryDomainModel>> CheckExistenceCategoryInDb(
             IEnumerable<CategoryDomainModel> categoryDomainModels)
         {
+            var categoryDomainModelsDistinct = categoryDomainModels.Distinct(new CategoryEqualityComparer()).ToList();
+
             var categoryDomainModelsDeletedDuplicates = new List<CategoryDomainModel>();
-            foreach (var category in categoryDomainModels)
+            foreach (var category in categoryDomainModelsDistinct)
             {
                 if (await this._categoryService.IsCategoryExistAsync(category.IdAtStore) == false)
                 {

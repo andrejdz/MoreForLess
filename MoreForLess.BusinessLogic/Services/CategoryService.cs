@@ -79,9 +79,8 @@ namespace MoreForLess.BusinessLogic.Services
 
                 storeCategory.ShopId = shopId;
 
+                _logger.Info($"Adding store's category: {storeCategory.Name} into collection.");
                 storeCategories.Add(storeCategory);
-
-                _logger.Info($"Saving store's category: {storeCategory.Name} into database.");
             }
 
             _logger.Info($"Saving store's categories into database.");

@@ -293,14 +293,14 @@ namespace MoreForLess.BusinessLogic.Adapters
                 }
 
                 // Getting all categories related to current good.
-                this.GetParentIdAtStore(categoryDomainModels, category);
+                this.GetAncestorsCategories(categoryDomainModels, category);
             }
 
             return categoryDomainModels.Distinct(new CategoryEqualityComparer());
         }
 
         /// <summary>
-        ///     Gets all categories related to current good.
+        ///     Gets all ancestor's categories related to the current good.
         /// </summary>
         /// <param name="categoryDomainModels">
         ///     Collection of instances of <see cref="CategoryDomainModel"/>
@@ -311,7 +311,7 @@ namespace MoreForLess.BusinessLogic.Adapters
         /// <returns>
         ///     Main category of good.
         /// </returns>
-        private CategoryDomainModel GetParentIdAtStore(
+        private CategoryDomainModel GetAncestorsCategories(
             IList<CategoryDomainModel> categoryDomainModels,
             XElement category)
         {
@@ -320,7 +320,7 @@ namespace MoreForLess.BusinessLogic.Adapters
                 var parentCategory = category.Element(this._xns + "Ancestors")
                     .Element(this._xns + "BrowseNode");
 
-                var parentCategoryDomainModel = this.GetParentIdAtStore(categoryDomainModels, parentCategory);
+                var parentCategoryDomainModel = this.GetAncestorsCategories(categoryDomainModels, parentCategory);
 
                 var categoryDomainModel = new CategoryDomainModel
                 {
