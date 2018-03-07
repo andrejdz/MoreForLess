@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 using MoreForLess.DataAccess.Entities;
 
 namespace MoreForLess.DataAccess.Configurations
@@ -13,7 +14,9 @@ namespace MoreForLess.DataAccess.Configurations
         /// </summary>
         public StoreCategoryConfig()
         {
-            this.HasKey(c => c.IdAtStore);
+            this.Property(c => c.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .HasColumnOrder(0);
 
             this.Property(c => c.IdAtStore)
                 .IsRequired()

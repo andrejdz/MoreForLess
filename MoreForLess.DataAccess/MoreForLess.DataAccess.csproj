@@ -95,6 +95,10 @@
     <Compile Include="Migrations\201803070033552_MadeIdAtStoreRequired.Designer.cs">
       <DependentUpon>201803070033552_MadeIdAtStoreRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803071506110_AddedIdToStoreCategory.cs" />
+    <Compile Include="Migrations\201803071506110_AddedIdToStoreCategory.Designer.cs">
+      <DependentUpon>201803071506110_AddedIdToStoreCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803070033552_MadeIdAtStoreRequired.resx">
       <DependentUpon>201803070033552_MadeIdAtStoreRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803071506110_AddedIdToStoreCategory.resx">
+      <DependentUpon>201803071506110_AddedIdToStoreCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
