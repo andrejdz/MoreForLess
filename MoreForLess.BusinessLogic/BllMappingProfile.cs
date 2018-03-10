@@ -38,6 +38,14 @@ namespace MoreForLess.BusinessLogic
                 .ForMember(d => d.ShopId, opt => opt.Ignore())
                 .ForMember(d => d.Shop, opt => opt.Ignore())
                 .ForMember(d => d.Timestamp, opt => opt.Ignore());
+
+            this.CreateMap<CommentDomainModel, Comment>()
+                .ForMember(d => d.Text, opt => opt.MapFrom(s => s.Text))
+                .ForMember(d => d.GoodId, opt => opt.MapFrom(s => s.GoodId))
+                .ForAllOtherMembers(opt => opt.Ignore());
+
+            this.CreateMap<Comment, CommentDomainModel>()
+                .ForMember(d => d.GoodId, opt => opt.MapFrom(s => s.GoodId.Value));
         }
     }
 }

@@ -157,6 +157,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Infrastructure\FluentValidationFactory.cs" />
     <Compile Include="Filters\ValidateModelStateFilter.cs" />

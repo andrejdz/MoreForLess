@@ -23,6 +23,7 @@ namespace MoreForLess.BusinessLogic
             container.Register<IGoodService, GoodService>(Lifestyle.Scoped);
             container.Register<ICategoryService, CategoryService>(Lifestyle.Scoped);
             container.Register<IAddGoodsService, AddGoodsService>(Lifestyle.Scoped);
+            container.Register<ICommentService, CommentService>(Lifestyle.Scoped);
 
             container.Register<ISignedRequestCreatorService<SignedRequestAmazonCreatorService>, SignedRequestAmazonCreatorService>(Lifestyle.Scoped);
             container.Register<IStoreAdapter<AmazonAdapter>, AmazonAdapter>(Lifestyle.Scoped);

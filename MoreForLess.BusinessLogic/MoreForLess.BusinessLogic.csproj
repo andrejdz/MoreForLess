@@ -88,21 +88,26 @@
     <Compile Include="Adapters\AmazonAdapter.cs" />
     <Compile Include="Adapters\Interfaces\IStoreAdapter.cs" />
     <Compile Include="Models\CategoryDomainModel.cs" />
+    <Compile Include="Models\CommentDomainModel.cs" />
     <Compile Include="Models\Comparers\CategoryEqualityComparer.cs" />
     <Compile Include="Models\RequestParametersModel.cs" />
+    <Compile Include="Models\ScoreDomainModel.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\CommentService.cs" />
     <Compile Include="Services\Interfaces\ICategoryService.cs" />
+    <Compile Include="Services\Interfaces\ICommentService.cs" />
     <Compile Include="Services\Interfaces\IGoodService.cs" />
     <Compile Include="Services\AddGoodsService.cs" />
     <Compile Include="Services\Interfaces\IAddGoodsService.cs" />
     <Compile Include="Services\Interfaces\ISignedRequestCreatorService.cs" />
     <Compile Include="Services\SignedRequestAmazonCreatorService.cs" />
     <Compile Include="Validation\CategoryDomainModelValidator.cs" />
+    <Compile Include="Validation\CommentDomainModelValidator.cs" />
     <Compile Include="Validation\GoodDomainModelValidator.cs" />
     <Compile Include="Models\GoodDomainModel.cs" />
     <Compile Include="BllMappingProfile.cs" />
