@@ -159,6 +159,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
+    <Compile Include="Controllers\ScoresController.cs" />
     <Compile Include="Infrastructure\FluentValidationFactory.cs" />
     <Compile Include="Filters\ValidateModelStateFilter.cs" />
     <Compile Include="Global.asax.cs">

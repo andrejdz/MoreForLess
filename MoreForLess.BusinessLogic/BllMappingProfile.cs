@@ -46,6 +46,14 @@ namespace MoreForLess.BusinessLogic
 
             this.CreateMap<Comment, CommentDomainModel>()
                 .ForMember(d => d.GoodId, opt => opt.MapFrom(s => s.GoodId.Value));
+
+            this.CreateMap<ScoreDomainModel, Score>()
+                .ForMember(d => d.Value, opt => opt.MapFrom(s => s.Value))
+                .ForMember(d => d.GoodId, opt => opt.MapFrom(s => s.GoodId))
+                .ForAllOtherMembers(opt => opt.Ignore());
+
+            this.CreateMap<Score, ScoreDomainModel>()
+                .ForMember(d => d.GoodId, opt => opt.MapFrom(s => s.GoodId.Value));
         }
     }
 }
