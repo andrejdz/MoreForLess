@@ -30,6 +30,7 @@ namespace MoreForLess.BusinessLogic
 
             this.CreateMap<Good, GoodDomainModel>()
                 .ForMember(d => d.Categories, opt => opt.Ignore());
+                .ForMember(d => d.CategoryIdsOnShop, opt => opt.Ignore());
 
             this.CreateMap<CategoryDomainModel, StoreCategory>()
                 .ForMember(d => d.Id, opt => opt.Ignore())

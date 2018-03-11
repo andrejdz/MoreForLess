@@ -52,7 +52,10 @@ namespace MoreForLess.BusinessLogic.Models
 
         /// <summary>
         ///     Gets or sets categories related to this good.
+        ///     Gets or sets category's ids on shop related to this good.
+        ///     Uses when adding good to database.
         /// </summary>
         public IEnumerable<CategoryDomainModel> Categories { get; set; }
+        public IEnumerable<CategoryDomainModel> CategoryIdsOnShop { get; set; }
     }
 }

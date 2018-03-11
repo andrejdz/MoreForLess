@@ -99,7 +99,7 @@ namespace MoreForLess.BusinessLogic.Services
                     // Checking if category already exist into database.
                     // Creating new collection without duplicates.
                     IReadOnlyCollection<CategoryDomainModel> categoryDomainModelsDeletedDuplicates = 
-                        await this.CheckExistenceCategoryInDb(goodDomainModels.SelectMany(g => g.Categories));
+                        await this.CheckExistenceCategoryInDb(goodDomainModels.SelectMany(g => g.CategoryIdsOnShop));
 
                     // Adding collection of goods to database.
                     if (goodDomainModelsDeletedDuplicates.Any())

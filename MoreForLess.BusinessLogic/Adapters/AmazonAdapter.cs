@@ -188,8 +188,7 @@ namespace MoreForLess.BusinessLogic.Adapters
                     LinkOnPicture = linkOnPicture,
                     CurrencyName = "USD",
                     ShopName = "AMAZON",
-                    CategoryIdOnShop = categoryIdOnShop,
-                    Categories = categoryDomainModels
+                    CategoryIdsOnShop = categoryDomainModels
                 };
 
                 goodDomainModels.Add(goodDomainModel);
