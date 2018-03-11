@@ -90,6 +90,8 @@
     <Compile Include="Models\CategoryDomainModel.cs" />
     <Compile Include="Models\CommentDomainModel.cs" />
     <Compile Include="Models\Comparers\CategoryEqualityComparer.cs" />
+    <Compile Include="Models\GoodPagingDomainModel.cs" />
+    <Compile Include="Models\PagingDomainModel.cs" />
     <Compile Include="Models\RequestParametersModel.cs" />
     <Compile Include="Models\ScoreDomainModel.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -116,6 +118,7 @@
     <Compile Include="BusinessLayerPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GoodService.cs" />
+    <Compile Include="Validation\PagingDomainModelValidator.cs" />
     <Compile Include="Validation\RequestParameterModelValidator.cs" />
     <Compile Include="Validation\ScoreDomainModelValidator.cs" />
   </ItemGroup>

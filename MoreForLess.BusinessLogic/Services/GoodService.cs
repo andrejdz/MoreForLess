@@ -143,14 +143,32 @@ namespace MoreForLess.BusinessLogic.Services
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<GoodDomainModel>> GetAllGoodsAsync()
+        public async Task<GoodPagingDomainModel> GetAllGoodsAsync(int currentPage, int itemsPerPage)
         {
+            _logger.Info("Counting number of goods has been placed into database.");
+            var totalItems = await this._context.Goods.CountAsync();
+
             _logger.Info("Retrieving collection of good items.");
-            IEnumerable<Good> goods = await this._context.Goods.ToListAsync();
+            var goods = await this._context.Goods
+                .OrderBy(g => g.Id)
+                .Skip((currentPage - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .ToListAsync();
 
-            var returnedGoods = goods.Select(good => this._mapper.Map<GoodDomainModel>(good));
+            var goodDomainModels = goods.Select(good => this._mapper.Map<GoodDomainModel>(good));
 
-            return returnedGoods;
+            var pagingDomainModel = new PagingDomainModel
+            {
+                CurrentPage = currentPage,
+                ItemsPerPage = itemsPerPage,
+                TotalItems = totalItems
+            };
+
+            return new GoodPagingDomainModel
+            {
+                Goods = goodDomainModels,
+                PageInfo = pagingDomainModel
+            };
         }
 
         /// <inheritdoc />

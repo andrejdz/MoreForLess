@@ -10,6 +10,7 @@ using Swashbuckle.Swagger.Annotations;
 
 namespace MoreForLess.Controllers
 {
+    /// <inheritdoc />
     [RoutePrefix("api/goods")]
     public class GoodsController : ApiController
     {
@@ -18,6 +19,15 @@ namespace MoreForLess.Controllers
         private readonly IGoodService _goodService;
         private readonly IAddGoodsService _addUpdateGoodsService;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="GoodsController"/> class.
+        /// </summary>
+        /// <param name="goodService">
+        ///     Service that manages goods.
+        /// </param>
+        /// <param name="addUpdateGoodsService">
+        ///     Service that adds or updates goods.
+        /// </param>
         public GoodsController(
             IGoodService goodService,
             IAddGoodsService addUpdateGoodsService)
@@ -27,21 +37,27 @@ namespace MoreForLess.Controllers
         }
 
         /// <summary>
-        ///     Gets list of goods.
+        ///     Gets collection of goods and paging information.
         /// </summary>
+        /// <param name="currentPage">
+        ///     Number of current page.
+        /// </param>
+        /// <param name="itemsPerPage">
+        ///     Number of items per page.
+        /// </param>
         /// <returns>
-        ///     Collection of goods.
+        ///     Collection of goods and paging information.
         /// </returns>
         [Route("", Name = "GetAllGoods")]
-        [SwaggerResponse(HttpStatusCode.OK, type: typeof(IEnumerable<GoodDomainModel>))]
+        [SwaggerResponse(HttpStatusCode.OK, type: typeof(IEnumerable<GoodPagingDomainModel>))]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public async Task<IHttpActionResult> Get()
+        public async Task<IHttpActionResult> Get(int currentPage, int itemsPerPage)
         {
             _logger.Info("Getting all goods that are stored in database.");
-            IEnumerable<GoodDomainModel> goodList;
+            GoodPagingDomainModel goodPagingDomainModels;
             try
             {
-                goodList = await this._goodService.GetAllGoodsAsync();
+                goodPagingDomainModels = await this._goodService.GetAllGoodsAsync(currentPage, itemsPerPage);
             }
             catch (Exception ex)
             {
@@ -50,7 +66,7 @@ namespace MoreForLess.Controllers
             }
 
             _logger.Info("All goods have successfully been retrieved.");
-            return this.Ok(goodList);
+            return this.Ok(goodPagingDomainModels);
         }
 
         /// <summary>
@@ -92,10 +108,9 @@ namespace MoreForLess.Controllers
         /// <summary>
         ///     Start update good's data into database.
         /// </summary>
-        /// <param name="request">
-        ///     Url of good.
+        /// <param name="minPrice">
+        ///     Minimum price is multiplied by 100.
         /// </param>
-        /// <param name="page"></param>
         /// <returns>
         ///     Http result.
         /// </returns>
