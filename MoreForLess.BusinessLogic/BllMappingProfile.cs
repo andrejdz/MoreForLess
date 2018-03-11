@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using MoreForLess.BusinessLogic.Models;
 using MoreForLess.DataAccess.Entities;
 
@@ -26,10 +27,11 @@ namespace MoreForLess.BusinessLogic
                 .ForMember(d => d.Comments, opt => opt.Ignore())
                 .ForMember(d => d.Scores, opt => opt.Ignore());
 
-
-
             this.CreateMap<Good, GoodDomainModel>()
-                .ForMember(d => d.Categories, opt => opt.Ignore());
+                .ForMember(d => d.CurrencyName, opt => opt.MapFrom(s => s.Currency.Name))
+                .ForMember(d => d.ShopName, opt => opt.MapFrom(s => s.Shop.Name))
+                .ForMember(d => d.Average, opt =>
+                    opt.MapFrom(s => s.Scores.Count == 0 ? new double?() : s.Scores.Average(src => src.Value)))
                 .ForMember(d => d.CategoryIdsOnShop, opt => opt.Ignore());
 
             this.CreateMap<CategoryDomainModel, StoreCategory>()

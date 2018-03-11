@@ -3,8 +3,14 @@ using MoreForLess.BusinessLogic.Models;
 
 namespace MoreForLess.BusinessLogic.Validation
 {
+    /// <summary>
+    ///     Validates instance of <see cref="GoodDomainModel"/>.
+    /// </summary>
     public class GoodDomainModelValidator : AbstractValidator<GoodDomainModel>
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="GoodDomainModelValidator"/> class.
+        /// </summary>
         public GoodDomainModelValidator()
         {
             this.RuleFor(g => g.Name)
@@ -31,9 +37,16 @@ namespace MoreForLess.BusinessLogic.Validation
                 .NotEmpty()
                 .WithMessage("Currency is null, empty or contains only white-space characters.");
 
-            this.RuleFor(g => g.CategoryIdOnShop)
-                .NotEmpty()
-                .WithMessage("Category id at store is null, empty or contains only white-space characters.");
+            //this.RuleFor(g => g.CategoryId)
+            //    .NotEmpty()
+            //    .WithMessage("Id of category is null, empty or contains only white-space characters.");
+
+            this.RuleFor(g => g.Average.Value)
+                .GreaterThanOrEqualTo(1.0)
+                .WithMessage("Average value of scores less than 1.0.")
+                .LessThanOrEqualTo(5.0)
+                .WithMessage("Average value of scores grater than 5.0.");
+
         }
     }
 }

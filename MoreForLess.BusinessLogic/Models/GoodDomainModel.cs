@@ -46,16 +46,30 @@ namespace MoreForLess.BusinessLogic.Models
         public string ShopName { get; set; }
 
         /// <summary>
+        ///     Id of category that good belongs.
+        /// </summary>
+        public int? CategoryId { get; set; }
+
+        /// <summary>
+        ///     Gets or sets collection of comments.
+        /// </summary>
+        public IEnumerable<CommentDomainModel> Comments { get; set; }
+
+        /// <summary>
+        ///     Gets or sets average value of scores.
+        /// </summary>
+        public double? Average { get; set; }
+
+        /// <summary>
         ///     Gets or sets an category of good at store.
+        ///     Uses when adding good to database.
         /// </summary>
         public string CategoryIdOnShop { get; set; }
 
         /// <summary>
-        ///     Gets or sets categories related to this good.
         ///     Gets or sets category's ids on shop related to this good.
         ///     Uses when adding good to database.
         /// </summary>
-        public IEnumerable<CategoryDomainModel> Categories { get; set; }
         public IEnumerable<CategoryDomainModel> CategoryIdsOnShop { get; set; }
     }
 }
