@@ -18,7 +18,7 @@ namespace MoreForLess.BusinessLogic.Services.Interfaces
         /// <param name="shopName">
         ///     Shop's name.
         /// </param>
-        Task CreateAsync(
+        Task CreateCategoriesAsync(
             IReadOnlyCollection<CategoryDomainModel> categories,
             string shopName);
 
@@ -28,18 +28,18 @@ namespace MoreForLess.BusinessLogic.Services.Interfaces
         /// <param name="id">
         ///     Id of category which will be deleted.
         /// </param>
-        Task DeleteAsync(int id);
+        Task DeleteCategoryAsync(string id);
 
         /// <summary>
         ///     Async method of getting the category by its id.
         /// </summary>
         /// <param name="id">
-        ///     Id of good, which is needed to get.
+        ///     Id of category.
         /// </param>
         /// <returns>
         ///     Instance of type <see cref="CategoryDomainModel"/>.
         /// </returns>
-        Task<CategoryDomainModel> GetCategoryByIdAsync(int id);
+        Task<CategoryDomainModel> GetCategoryByIdAsync(string id);
 
         /// <summary>
         ///     Async method of getting all categories.
@@ -47,7 +47,7 @@ namespace MoreForLess.BusinessLogic.Services.Interfaces
         /// <returns>
         ///     Collection of instances of type <see cref="CategoryDomainModel"/>.
         /// </returns>
-        Task<IEnumerable<GoodDomainModel>> GetAllCategoriesAsync();
+        Task<IReadOnlyCollection<CategoryDomainModel>> GetAllCategoriesAsync();
 
         /// <summary>
         ///     Check whether category already added to database by id.

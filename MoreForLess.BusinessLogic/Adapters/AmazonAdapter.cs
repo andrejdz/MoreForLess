@@ -188,6 +188,7 @@ namespace MoreForLess.BusinessLogic.Adapters
                     LinkOnPicture = linkOnPicture,
                     CurrencyName = "USD",
                     ShopName = "AMAZON",
+                    CategoryIdOnShop = categoryIdOnShop,
                     CategoryIdsOnShop = categoryDomainModels
                 };
 
@@ -340,7 +341,7 @@ namespace MoreForLess.BusinessLogic.Adapters
                     Name = category.Element(this._xns + "Name") == null
                         ? "Other category"
                         : category.Element(this._xns + "Name").Value,
-                    ParentIdAtStore = "0"
+                    ParentIdAtStore = null
                 };
 
                 categoryDomainModels.Add(categoryDomainModel);

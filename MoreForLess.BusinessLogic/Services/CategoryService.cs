@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
@@ -45,7 +46,7 @@ namespace MoreForLess.BusinessLogic.Services
         }
 
         /// <inheritdoc />
-        public async Task CreateAsync(
+        public async Task CreateCategoriesAsync(
             IReadOnlyCollection<CategoryDomainModel> categoryDomainModels,
             string shopName)
         {
@@ -90,21 +91,53 @@ namespace MoreForLess.BusinessLogic.Services
         }
 
         /// <inheritdoc />
-        public async Task DeleteAsync(int id)
+        public async Task DeleteCategoryAsync(string id)
         {
-            throw new NotImplementedException();
+            _logger.Info($"Looking for category by id: {id}.");
+            StoreCategory storeCategory;
+            try
+            {
+                storeCategory = await this._context.StoreCategories.SingleAsync(c => c.IdAtStore == id);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new ArgumentException("Good hasn't been found.", ex);
+            }
+
+            _logger.Info($"Removing category: {storeCategory.Name} from database.");
+            this._context.StoreCategories.Remove(storeCategory);
+
+            await this._context.SaveChangesAsync();
         }
 
         /// <inheritdoc />
-        public async Task<CategoryDomainModel> GetCategoryByIdAsync(int id)
+        public async Task<CategoryDomainModel> GetCategoryByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            _logger.Info($"Getting category by its id: {id}.");
+            StoreCategory storeCategory;
+            try
+            {
+                storeCategory = await this._context.StoreCategories
+                    .Where(c => c.IdAtStore == id)
+                    .SingleAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new ArgumentException("Category hasn't been found.", ex);
+            }
+
+            return this._mapper.Map<CategoryDomainModel>(storeCategory);
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<GoodDomainModel>> GetAllCategoriesAsync()
+        public async Task<IReadOnlyCollection<CategoryDomainModel>> GetAllCategoriesAsync()
         {
-            throw new NotImplementedException();
+            _logger.Info($"Getting all categories.");
+            IReadOnlyCollection<StoreCategory> storeCategories = await this._context.StoreCategories
+                .Where(c => c.ParentIdAtStore == null)
+                .ToListAsync();
+
+            return this._mapper.Map<IReadOnlyCollection<CategoryDomainModel>> (storeCategories);
         }
 
         /// <inheritdoc />

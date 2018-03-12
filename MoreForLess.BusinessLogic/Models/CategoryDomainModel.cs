@@ -1,4 +1,6 @@
-﻿namespace MoreForLess.BusinessLogic.Models
+﻿using System.Collections.Generic;
+
+namespace MoreForLess.BusinessLogic.Models
 {
     /// <summary>
     ///     Type that stores category's info.
@@ -19,5 +21,10 @@
         ///     Id of parent category.
         /// </summary>
         public string ParentIdAtStore { get; set; }
+
+        /// <summary>
+        ///     Gets or sets children categories.
+        /// </summary>
+        public IReadOnlyCollection<CategoryDomainModel> ChildrenCategories { get; set; }
     }
 }

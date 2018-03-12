@@ -109,7 +109,7 @@ namespace MoreForLess.BusinessLogic.Services
                         // Adding collection of categories to database.
                         if (categoryDomainModelsDeletedDuplicates.Any())
                         {
-                            await this._categoryService.CreateAsync(
+                            await this._categoryService.CreateCategoriesAsync(
                                 categoryDomainModelsDeletedDuplicates,
                                 goodDomainModelsDeletedDuplicates.First().ShopName);
                         }
