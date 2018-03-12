@@ -17,7 +17,7 @@ namespace MoreForLess.Controllers
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private readonly IGoodService _goodService;
-        private readonly IAddGoodsService _addUpdateGoodsService;
+        private readonly IAddGoodsService _addGoodsService;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="GoodsController"/> class.
@@ -25,15 +25,15 @@ namespace MoreForLess.Controllers
         /// <param name="goodService">
         ///     Service that manages goods.
         /// </param>
-        /// <param name="addUpdateGoodsService">
+        /// <param name="addGoodsService">
         ///     Service that adds or updates goods.
         /// </param>
         public GoodsController(
             IGoodService goodService,
-            IAddGoodsService addUpdateGoodsService)
+            IAddGoodsService addGoodsService)
         {
             this._goodService = goodService;
-            this._addUpdateGoodsService = addUpdateGoodsService;
+            this._addGoodsService = addGoodsService;
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace MoreForLess.Controllers
 
             try
             {
-                await this._addUpdateGoodsService.AddGoodsAsync(minPrice);
+                await this._addGoodsService.AddGoodsAsync(minPrice);
             }
             catch (ArgumentException ex)
             {

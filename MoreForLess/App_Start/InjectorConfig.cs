@@ -36,7 +36,7 @@ namespace MoreForLess
             // Register types for instance.
             RegisterSalesAggregatorTypes(container);
 
-            // This is an extention method from the integration package.
+            // This is an extension method from the integration package.
             container.RegisterWebApiControllers(httpConfiguration);
 
             container.Verify();
