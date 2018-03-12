@@ -36,17 +36,6 @@ namespace MoreForLess.BusinessLogic.Validation
             this.RuleFor(g => g.CurrencyName)
                 .NotEmpty()
                 .WithMessage("Currency is null, empty or contains only white-space characters.");
-
-            //this.RuleFor(g => g.CategoryId)
-            //    .NotEmpty()
-            //    .WithMessage("Id of category is null, empty or contains only white-space characters.");
-
-            this.RuleFor(g => g.Average.Value)
-                .GreaterThanOrEqualTo(1.0)
-                .WithMessage("Average value of scores less than 1.0.")
-                .LessThanOrEqualTo(5.0)
-                .WithMessage("Average value of scores grater than 5.0.");
-
         }
     }
 }
