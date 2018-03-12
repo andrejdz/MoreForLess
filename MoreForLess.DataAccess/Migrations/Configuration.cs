@@ -146,24 +146,36 @@ namespace MoreForLess.DataAccess.Migrations
 
             context.SaveChanges();
 
+            var rootCategory = new StoreCategory()
+            {
+                IdAtStore = "172282",
+                Name = "Electronics",
+                ParentIdAtStore = null,
+                ShopId = 1,
+                CategoryId = 1
+            };
+
+            context.StoreCategories
+                .AddOrUpdate(s => new { s.IdAtStore, s.Name, s.ParentIdAtStore, s.ShopId }, rootCategory);
+
+            context.SaveChanges();
+
+            var rootCategory2 = new StoreCategory()
+            {
+                IdAtStore = "493964",
+                Name = "Categories",
+                ParentIdAtStore = "172282",
+                ShopId = 1,
+                CategoryId = 1
+            };
+
+            context.StoreCategories
+                .AddOrUpdate(s => new { s.IdAtStore, s.Name, s.ParentIdAtStore, s.ShopId }, rootCategory2);
+
+            context.SaveChanges();
+
             List<StoreCategory> storeCategories = new List<StoreCategory>()
             {
-                new StoreCategory()
-                {
-                    IdAtStore = "172282",
-                    Name = "Electronics",
-                    ParentIdAtStore = "0",
-                    ShopId = 1,
-                    CategoryId = 1
-                },
-                new StoreCategory()
-                {
-                    IdAtStore = "493964",
-                    Name = "Categories",
-                    ParentIdAtStore = "172282",
-                    ShopId = 1,
-                    CategoryId = 1
-                },
                 new StoreCategory()
                 {
                     IdAtStore = "281407",
@@ -343,14 +355,14 @@ namespace MoreForLess.DataAccess.Migrations
             context.Comments
                 .AddOrUpdate(c => new { c.Text, c.GoodId }, comment);
 
-            //var score = new Score
-            //{
-            //    Value = 4,
-            //    GoodId = 1
-            //};
+            var score = new Score
+            {
+                Value = 4,
+                GoodId = 1
+            };
 
-            //context.Scores
-            //    .AddOrUpdate(score);
+            context.Scores
+                .AddOrUpdate(score);
 
             context.SaveChanges();
         }

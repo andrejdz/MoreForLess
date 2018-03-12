@@ -14,10 +14,6 @@ namespace MoreForLess.BusinessLogic.Validation
             this.RuleFor(c => c.Name)
                 .NotEmpty()
                 .WithMessage("Name is null, empty or contains only white-space characters.");
-
-            this.RuleFor(c => c.ParentIdAtStore)
-                .NotEmpty()
-                .WithMessage("Id of parent category is null, empty or contains only white-space characters.");
         }
     }
 }

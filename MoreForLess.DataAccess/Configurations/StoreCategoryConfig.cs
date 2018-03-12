@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 using MoreForLess.DataAccess.Entities;
 
 namespace MoreForLess.DataAccess.Configurations
@@ -14,12 +13,11 @@ namespace MoreForLess.DataAccess.Configurations
         /// </summary>
         public StoreCategoryConfig()
         {
-            this.Property(c => c.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
-                .HasColumnOrder(0);
+            this.HasOptional(c => c.Parent)
+                .WithMany(c => c.Children)
+                .HasForeignKey(p => p.ParentIdAtStore);
 
-            this.HasIndex(c => c.IdAtStore)
-                .IsUnique();
+            this.HasKey(c => c.IdAtStore);
 
             this.Property(c => c.IdAtStore)
                 .IsRequired()
@@ -30,7 +28,7 @@ namespace MoreForLess.DataAccess.Configurations
                 .HasMaxLength(250);
 
             this.Property(c => c.ParentIdAtStore)
-                .IsRequired()
+                .IsOptional()
                 .HasMaxLength(50);
 
             this.Property(c => c.Timestamp)
