@@ -9,7 +9,7 @@ namespace MoreForLess.Infrastructure
         private readonly Container _container;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FluentValidationFactory"/> class.
+        ///     Initializes a new instance of the <see cref="FluentValidationFactory"/> class.
         /// </summary>
         /// <param name="container">
         ///     The Simple Injector Container

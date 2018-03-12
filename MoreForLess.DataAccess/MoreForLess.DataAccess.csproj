@@ -62,7 +62,6 @@
     <Compile Include="Configurations\CurrencyConfig.cs" />
     <Compile Include="Configurations\GoodConfig.cs" />
     <Compile Include="Configurations\ShopConfig.cs" />
-    <Compile Include="DataAccessPackage.cs" />
     <Compile Include="EF\ApplicationDbContext.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Score.cs" />
@@ -112,6 +111,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="DALDiagrams\ApplicationDbContext.cd" />
+    <None Include="DALDiagrams\Comment.cd" />
+    <None Include="DALDiagrams\Currency.cd" />
+    <None Include="DALDiagrams\Good.cd" />
+    <None Include="DALDiagrams\Score.cd" />
+    <None Include="DALDiagrams\Shop.cd" />
+    <None Include="DALDiagrams\StoreCategory.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

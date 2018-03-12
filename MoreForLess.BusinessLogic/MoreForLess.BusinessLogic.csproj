@@ -124,11 +124,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="BLLDiagrams\AddGoodsService.cd" />
+    <None Include="BLLDiagrams\AmazonAdapter.cd" />
+    <None Include="BLLDiagrams\CategoryDomainModel.cd" />
+    <None Include="BLLDiagrams\CategoryService.cd" />
+    <None Include="BLLDiagrams\CommentDomainModel.cd" />
+    <None Include="BLLDiagrams\CommentService.cd" />
+    <None Include="BLLDiagrams\GoodDomainModel.cd" />
+    <None Include="BLLDiagrams\GoodService.cd" />
+    <None Include="BLLDiagrams\ScoreDomainModel.cd" />
+    <None Include="BLLDiagrams\SignedRequestAmazonCreatorService.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="BLLDiagrams\ScoreService.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoreForLess.DataAccess\MoreForLess.DataAccess.csproj">

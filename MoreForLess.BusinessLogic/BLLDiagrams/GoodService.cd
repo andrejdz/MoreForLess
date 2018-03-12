@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="MoreForLess.BusinessLogic.Services.GoodService">
+    <Position X="5.75" Y="0.5" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAIBAAAAAABAAAAIAAAAACAEAAAAIAAAIA=</HashCode>
+      <FileName>Services\GoodService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.108" />
+  </Class>
+  <Interface Name="MoreForLess.BusinessLogic.Services.Interfaces.IGoodService">
+    <Position X="0.5" Y="0.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAAAIAAAIA=</HashCode>
+      <FileName>Services\Interfaces\IGoodService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

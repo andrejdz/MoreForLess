@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="MoreForLess.BusinessLogic.Services.SignedRequestAmazonCreatorService">
+    <Position X="6.75" Y="0.5" Width="5.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="MoreForLess.BusinessLogic.Services.SignedRequestAmazonCreatorService.StringComparerByByte">
+        <TypeIdentifier>
+          <NewMemberFileName>Services\SignedRequestAmazonCreatorService.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAABAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\SignedRequestAmazonCreatorService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="MoreForLess.BusinessLogic.Services.Interfaces.ISignedRequestCreatorService&lt;T&gt;">
+    <Position X="1.75" Y="0.5" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\ISignedRequestCreatorService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

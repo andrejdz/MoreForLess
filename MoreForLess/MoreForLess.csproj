@@ -188,6 +188,10 @@
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </None>
+    <Content Include="WebApiDiagrams\GoodsController.cd" />
+    <Content Include="WebApiDiagrams\CategoryController.cd" />
+    <Content Include="WebApiDiagrams\CommentsController.cd" />
+    <Content Include="WebApiDiagrams\ScoresController.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
