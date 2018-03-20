@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 using MoreForLess.Filters;
 
 namespace MoreForLess
@@ -12,6 +13,10 @@ namespace MoreForLess
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            // Enabling CORS.
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
