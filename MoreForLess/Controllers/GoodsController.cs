@@ -53,6 +53,13 @@ namespace MoreForLess.Controllers
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
         public async Task<IHttpActionResult> Get(int currentPage, int itemsPerPage)
         {
+            if (currentPage < 1 || itemsPerPage < 1)
+            {
+                string info = $"{nameof(currentPage)} or {nameof(itemsPerPage)} less than 1.";
+                _logger.Info(info);
+                return this.BadRequest(info);
+            }
+
             _logger.Info("Getting all goods that are stored in database.");
             GoodPagingDomainModel goodPagingDomainModels;
             try
