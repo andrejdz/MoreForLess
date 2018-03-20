@@ -1,0 +1,3 @@
+[submodule "MoreForLessFront"]
+	path = MoreForLessFront
+	url = git@github.com:andrejdz/MoreForLessFront.git
