@@ -72,7 +72,7 @@ namespace MoreForLess.Controllers
         ///     Http result.
         /// </returns>
         [Route("")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, type: typeof(CommentDomainModel))]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
         public async Task<IHttpActionResult> Post(CommentDomainModel commentDomainModel)
@@ -96,7 +96,7 @@ namespace MoreForLess.Controllers
 
             string messageIfSuccess = $"Comment has been successfully added.";
             _logger.Info(messageIfSuccess);
-            return this.Ok(messageIfSuccess);
+            return this.Ok(commentDomainModel);
         }
 
         /// <summary>
