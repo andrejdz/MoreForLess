@@ -308,41 +308,6 @@ namespace MoreForLess.DataAccess.Migrations
                     .AddOrUpdate(s => new { s.IdAtStore, s.Name, s.ParentIdAtStore, s.ShopId }, item);
             }
 
-            var good = new Good()
-            {
-                Name = "Apple iPhone 7 Plus Unlocked Phone 128 GB - International Version (Silver)",
-                Price = 888M,
-                IdGoodOnShop = "B01LYHLFTK",
-                LinkOnProduct = "https://www.amazon.com/Apple-Plus-Unlocked-128-GB/dp/B01LYHLFTK/ref=lp_16947735011_1_1_sspa",
-                LinkOnPicture = "https://images-na.ssl-images-amazon.com/images/G/01/apparel/rcxgs/tile._CB211431200_.gif",
-                CategoryIdOnShop = "2811119011",
-                CurrencyId = 1,
-                ShopId = 1,
-            };
-
-            context.Goods
-                .AddOrUpdate(g => new { g.Name, g.Price, g.IdGoodOnShop, g.LinkOnProduct, g.CategoryIdOnShop, g.ShopId }, good);
-
-            context.SaveChanges();
-
-            var comment = new Comment
-            {
-                Text = "Very useful product. I'm satisfied",
-                GoodId = 1
-            };
-
-            context.Comments
-                .AddOrUpdate(c => new { c.Text, c.GoodId }, comment);
-
-            //var score = new Score
-            //{
-            //    Value = 4,
-            //    GoodId = 1
-            //};
-
-            //context.Scores
-            //    .AddOrUpdate(score);
-
             context.SaveChanges();
         }
     }
