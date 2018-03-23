@@ -46,7 +46,7 @@ namespace MoreForLess.Controllers
         /// <summary>
         ///     Gets collection of goods and paging information.
         /// </summary>
-        /// <param name="currenPage">
+        /// <param name="currentPage">
         ///     Number of current page.
         /// </param>
         /// <param name="itemsPerPage">
@@ -61,11 +61,11 @@ namespace MoreForLess.Controllers
         [Route("", Name = "GetAllGoods")]
         [SwaggerResponse(HttpStatusCode.OK, type: typeof(IEnumerable<GoodPagingDomainModel>))]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public async Task<IHttpActionResult> Get (int currenPage, int itemsPerPage, string categoryId)
+        public async Task<IHttpActionResult> Get (int currentPage, int itemsPerPage, string categoryId)
         {
             PageCategoryModel pageCategoryModel = new PageCategoryModel
             {
-                CurrentPage = currenPage,
+                CurrentPage = currentPage,
                 ItemsPerPage = itemsPerPage,
                 CategoryId = categoryId
             };
