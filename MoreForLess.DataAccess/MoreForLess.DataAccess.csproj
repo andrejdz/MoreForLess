@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201803112143243_SelfReferencingTable.Designer.cs">
       <DependentUpon>201803112143243_SelfReferencingTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803231035422_MadeRelationStoreCategoryGood.cs" />
+    <Compile Include="Migrations\201803231035422_MadeRelationStoreCategoryGood.Designer.cs">
+      <DependentUpon>201803231035422_MadeRelationStoreCategoryGood.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -147,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803112143243_SelfReferencingTable.resx">
       <DependentUpon>201803112143243_SelfReferencingTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803231035422_MadeRelationStoreCategoryGood.resx">
+      <DependentUpon>201803231035422_MadeRelationStoreCategoryGood.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

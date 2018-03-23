@@ -14,14 +14,6 @@ namespace MoreForLess.DataAccess.Configurations
         /// </summary>
         public CategoryConfig()
         {
-            this.HasMany(c => c.StoreCategories)
-                .WithOptional()
-                .HasForeignKey(sc => sc.CategoryId);
-
-            this.HasMany(c => c.Goods)
-                .WithOptional()
-                .HasForeignKey(g => g.CategoryId);
-
             this.Property(c => c.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 

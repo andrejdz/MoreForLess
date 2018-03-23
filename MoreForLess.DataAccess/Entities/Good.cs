@@ -24,10 +24,6 @@ namespace MoreForLess.DataAccess.Entities
 
         public virtual Currency Currency { get; set; }
 
-        public int? CategoryId { get; set; }
-
-        public virtual Category Category { get; set; }
-
         public int ShopId { get; set; }
 
         public virtual Shop Shop { get; set; }

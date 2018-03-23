@@ -20,8 +20,6 @@ namespace MoreForLess.DataAccess.Entities
 
         public virtual Shop Shop { get; set; }
 
-        public int? CategoryId { get; set; }
-
-        public virtual Category Category { get; set; }
+        public virtual ICollection<Good> Goods { get; set; } = new HashSet<Good>();
     }
 }

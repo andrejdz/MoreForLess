@@ -13,15 +13,20 @@ namespace MoreForLess.DataAccess.Configurations
         /// </summary>
         public StoreCategoryConfig()
         {
-            this.HasOptional(c => c.Parent)
-                .WithMany(c => c.Children)
-                .HasForeignKey(p => p.ParentIdAtStore);
-
             this.HasKey(c => c.IdAtStore);
 
             this.Property(c => c.IdAtStore)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            this.HasMany(c => c.Goods)
+                .WithRequired()
+                .HasForeignKey(g => g.CategoryIdOnShop)
+                .WillCascadeOnDelete(false);
+
+            this.HasOptional(c => c.Parent)
+                .WithMany(c => c.Children)
+                .HasForeignKey(p => p.ParentIdAtStore);
 
             this.Property(c => c.Name)
                 .IsRequired()

@@ -152,7 +152,6 @@ namespace MoreForLess.DataAccess.Migrations
                 Name = "Electronics",
                 ParentIdAtStore = null,
                 ShopId = 1,
-                CategoryId = 1
             };
 
             context.StoreCategories
@@ -166,7 +165,6 @@ namespace MoreForLess.DataAccess.Migrations
                 Name = "Categories",
                 ParentIdAtStore = "172282",
                 ShopId = 1,
-                CategoryId = 1
             };
 
             context.StoreCategories
@@ -182,7 +180,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Accessories & Supplies",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 2
                 },
                 new StoreCategory()
                 {
@@ -190,7 +187,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Camera & Photo",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 3
                 },
                 new StoreCategory()
                 {
@@ -198,7 +194,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Car & Vehicle Electronics",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 4
                 },
                 new StoreCategory()
                 {
@@ -206,7 +201,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Cell Phones & Accessories",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 5
                 },
                 new StoreCategory()
                 {
@@ -214,7 +208,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Computers & Accessories",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 6
                 },
                 new StoreCategory()
                 {
@@ -222,7 +215,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Electronics Warranties",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 7
                 },
                 new StoreCategory()
                 {
@@ -230,7 +222,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "GPS & Navigation",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 8
                 },
                 new StoreCategory()
                 {
@@ -238,7 +229,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Headphones",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 9
                 },
                 new StoreCategory()
                 {
@@ -246,7 +236,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Home Audio",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 10
                 },
                 new StoreCategory()
                 {
@@ -254,7 +243,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Office Electronics",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 11
                 },
                 new StoreCategory()
                 {
@@ -262,7 +250,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Portable Audio & Video",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 12
                 },
                 new StoreCategory()
                 {
@@ -270,7 +257,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Security & Surveillance",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 13
                 },
                 new StoreCategory()
                 {
@@ -278,7 +264,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Service Plans",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 14
                 },
                 new StoreCategory()
                 {
@@ -286,7 +271,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Television & Video",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 15
                 },
                 new StoreCategory()
                 {
@@ -294,7 +278,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Video Game Consoles & Accessories",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 16
                 },
                 new StoreCategory()
                 {
@@ -302,7 +285,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Video Projectors",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 17
                 },
                 new StoreCategory()
                 {
@@ -310,7 +292,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "Wearable Technology",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 18
                 },
                 new StoreCategory()
                 {
@@ -318,7 +299,6 @@ namespace MoreForLess.DataAccess.Migrations
                     Name = "eBook Readers & Accessories",
                     ShopId = 1,
                     ParentIdAtStore = "493964",
-                    CategoryId = 19
                 },
             };
 
@@ -330,15 +310,14 @@ namespace MoreForLess.DataAccess.Migrations
 
             var good = new Good()
             {
-                Name = "Apple MacBook Pro 15'' Retina",
-                Price = 420.25M,
-                IdGoodOnShop = "BBBFFFGGGHHH",
-                LinkOnProduct = "LinkOnProduct",
-                LinkOnPicture = "LinkOnPicture",
-                CategoryIdOnShop = "493964",
+                Name = "Apple iPhone 7 Plus Unlocked Phone 128 GB - International Version (Silver)",
+                Price = 888M,
+                IdGoodOnShop = "B01LYHLFTK",
+                LinkOnProduct = "https://www.amazon.com/Apple-Plus-Unlocked-128-GB/dp/B01LYHLFTK/ref=lp_16947735011_1_1_sspa",
+                LinkOnPicture = "https://images-na.ssl-images-amazon.com/images/G/01/apparel/rcxgs/tile._CB211431200_.gif",
+                CategoryIdOnShop = "2811119011",
                 CurrencyId = 1,
                 ShopId = 1,
-                CategoryId = 1
             };
 
             context.Goods
@@ -355,14 +334,14 @@ namespace MoreForLess.DataAccess.Migrations
             context.Comments
                 .AddOrUpdate(c => new { c.Text, c.GoodId }, comment);
 
-            var score = new Score
-            {
-                Value = 4,
-                GoodId = 1
-            };
+            //var score = new Score
+            //{
+            //    Value = 4,
+            //    GoodId = 1
+            //};
 
-            context.Scores
-                .AddOrUpdate(score);
+            //context.Scores
+            //    .AddOrUpdate(score);
 
             context.SaveChanges();
         }

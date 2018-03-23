@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MoreForLess.DataAccess.Entities
+﻿namespace MoreForLess.DataAccess.Entities
 {
     public class Category
     {
@@ -11,9 +9,5 @@ namespace MoreForLess.DataAccess.Entities
         public string ParentId { get; set; }
 
         public byte[] Timestamp { get; set; }
-
-        public virtual ICollection<StoreCategory> StoreCategories { get; set; } = new HashSet<StoreCategory>();
-
-        public virtual ICollection<Good> Goods { get; set; } = new HashSet<Good>();
     }
 }
