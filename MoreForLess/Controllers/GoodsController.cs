@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using FluentValidation;
 using NLog;
 using MoreForLess.BusinessLogic.Models;
 using MoreForLess.BusinessLogic.Services.Interfaces;
@@ -18,6 +19,7 @@ namespace MoreForLess.Controllers
 
         private readonly IGoodService _goodService;
         private readonly IAddGoodsService _addGoodsService;
+        private readonly IValidator<PageCategoryModel> _pageCategoryModelValidator;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="GoodsController"/> class.
@@ -28,22 +30,30 @@ namespace MoreForLess.Controllers
         /// <param name="addGoodsService">
         ///     Service that adds or updates goods.
         /// </param>
+        /// <param name="pageCategoryModelValidator">
+        ///     Validator for <see cref="PageCategoryModel"/> instances.
+        /// </param>
         public GoodsController(
             IGoodService goodService,
-            IAddGoodsService addGoodsService)
+            IAddGoodsService addGoodsService,
+            IValidator<PageCategoryModel> pageCategoryModelValidator)
         {
             this._goodService = goodService;
             this._addGoodsService = addGoodsService;
+            this._pageCategoryModelValidator = pageCategoryModelValidator;
         }
 
         /// <summary>
         ///     Gets collection of goods and paging information.
         /// </summary>
-        /// <param name="currentPage">
+        /// <param name="currenPage">
         ///     Number of current page.
         /// </param>
         /// <param name="itemsPerPage">
-        ///     Number of items per page.
+        ///     Items per page.
+        /// </param>
+        /// <param name="categoryId">
+        ///     Category id at store.
         /// </param>
         /// <returns>
         ///     Collection of goods and paging information.
@@ -51,20 +61,31 @@ namespace MoreForLess.Controllers
         [Route("", Name = "GetAllGoods")]
         [SwaggerResponse(HttpStatusCode.OK, type: typeof(IEnumerable<GoodPagingDomainModel>))]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public async Task<IHttpActionResult> Get(int currentPage, int itemsPerPage)
+        public async Task<IHttpActionResult> Get (int currenPage, int itemsPerPage, string categoryId)
         {
-            if (currentPage < 1 || itemsPerPage < 1)
+            PageCategoryModel pageCategoryModel = new PageCategoryModel
             {
-                string info = $"{nameof(currentPage)} or {nameof(itemsPerPage)} less than 1.";
-                _logger.Info(info);
-                return this.BadRequest(info);
+                CurrentPage = currenPage,
+                ItemsPerPage = itemsPerPage,
+                CategoryId = categoryId
+            };
+
+            try
+            {
+                // Validating instance of type PageCategoryModel.
+                this._pageCategoryModelValidator.ValidateAndThrow(pageCategoryModel);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.Info(ex, ex.ToString());
+                return this.BadRequest();
             }
 
             _logger.Info("Getting all goods that are stored in database.");
             GoodPagingDomainModel goodPagingDomainModels;
             try
             {
-                goodPagingDomainModels = await this._goodService.GetAllGoodsAsync(currentPage, itemsPerPage);
+                goodPagingDomainModels = await this._goodService.GetAllGoodsAsync(pageCategoryModel);
             }
             catch (Exception ex)
             {

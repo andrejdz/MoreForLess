@@ -46,11 +46,6 @@ namespace MoreForLess.BusinessLogic.Models
         public string ShopName { get; set; }
 
         /// <summary>
-        ///     Id of category that good belongs.
-        /// </summary>
-        public int? CategoryId { get; set; }
-
-        /// <summary>
         ///     Gets or sets collection of comments.
         /// </summary>
         public IEnumerable<CommentDomainModel> Comments { get; set; }

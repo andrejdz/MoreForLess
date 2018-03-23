@@ -22,8 +22,6 @@ namespace MoreForLess.BusinessLogic
                 .ForMember(d => d.Currency, opt => opt.Ignore())
                 .ForMember(d => d.ShopId, opt => opt.Ignore())
                 .ForMember(d => d.Shop, opt => opt.Ignore())
-                .ForMember(d => d.CategoryId, opt => opt.Ignore())
-                .ForMember(d => d.Category, opt => opt.Ignore())
                 .ForMember(d => d.Comments, opt => opt.Ignore())
                 .ForMember(d => d.Scores, opt => opt.Ignore());
 

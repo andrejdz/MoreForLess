@@ -42,16 +42,13 @@ namespace MoreForLess.BusinessLogic.Services.Interfaces
         /// <summary>
         ///     Async method of getting all goods.
         /// </summary>
-        /// <param name="currentPage">
-        ///     Number of current page.
-        /// </param>
-        /// <param name="itemsPerPage">
-        ///     Number of items per page.
+        /// <param name="pageCategoryModel">
+        ///     Contains request's parameters.
         /// </param>
         /// <returns>
         ///     Collection of goods and paging information.
         /// </returns>
-        Task<GoodPagingDomainModel> GetAllGoodsAsync(int currentPage, int itemsPerPage);
+        Task<GoodPagingDomainModel> GetAllGoodsAsync(PageCategoryModel pageCategoryModel);
 
         /// <summary>
         ///     Method for checking the good in database by its link.

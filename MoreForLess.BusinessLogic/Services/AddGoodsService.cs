@@ -104,8 +104,6 @@ namespace MoreForLess.BusinessLogic.Services
                     // Adding collection of goods to database.
                     if (goodDomainModelsDeletedDuplicates.Any())
                     {
-                        await this._goodService.CreateAsync(goodDomainModelsDeletedDuplicates);
-
                         // Adding collection of categories to database.
                         if (categoryDomainModelsDeletedDuplicates.Any())
                         {
@@ -113,6 +111,8 @@ namespace MoreForLess.BusinessLogic.Services
                                 categoryDomainModelsDeletedDuplicates,
                                 goodDomainModelsDeletedDuplicates.First().ShopName);
                         }
+
+                        await this._goodService.CreateAsync(goodDomainModelsDeletedDuplicates);
                     }
                 }
             }

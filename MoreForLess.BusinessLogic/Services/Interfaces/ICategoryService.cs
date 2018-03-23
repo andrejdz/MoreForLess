@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MoreForLess.BusinessLogic.Models;
+using MoreForLess.DataAccess.Entities;
 
 namespace MoreForLess.BusinessLogic.Services.Interfaces
 {
@@ -42,6 +43,17 @@ namespace MoreForLess.BusinessLogic.Services.Interfaces
         Task<CategoryDomainModel> GetCategoryByIdAsync(string id);
 
         /// <summary>
+        ///     Async method of getting the category by its id.
+        /// </summary>
+        /// <param name="id">
+        ///     Id of category.
+        /// </param>
+        /// <returns>
+        ///     Instance of type <see cref="StoreCategory"/>.
+        /// </returns>
+        Task<StoreCategory> GetCategoryByIdAltAsync(string id);
+
+        /// <summary>
         ///     Async method of getting all categories.
         /// </summary>
         /// <returns>
@@ -60,5 +72,20 @@ namespace MoreForLess.BusinessLogic.Services.Interfaces
         ///     False if the category does not exist.
         /// </returns>
         Task<bool> IsCategoryExistAsync(string id);
+
+        /// <summary>
+        ///     Check if category exists in category's chain of good.
+        /// </summary>
+        /// <param name="categoryId">
+        ///     Category's id.
+        /// </param>
+        /// <param name="goodId">
+        ///     Good's id.
+        /// </param>
+        /// <returns>
+        ///     True or false.
+        /// </returns>
+        Task<bool> IsCategoryInInheritanceChain(string categoryId, string goodId);
+        //bool IsCategoryInInheritanceChain(string categoryId, string goodId);
     }
 }

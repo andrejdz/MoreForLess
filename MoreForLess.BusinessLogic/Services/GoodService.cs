@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
+using MoreForLess.BusinessLogic.Helpers;
 using NLog;
 using MoreForLess.BusinessLogic.Models;
 using MoreForLess.BusinessLogic.Services.Interfaces;
@@ -21,6 +22,7 @@ namespace MoreForLess.BusinessLogic.Services
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
         private readonly IValidator<GoodDomainModel> _goodDomainModelValidator;
+        private readonly ICategoryService _categoryService;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="GoodService"/> class.
@@ -35,14 +37,19 @@ namespace MoreForLess.BusinessLogic.Services
         ///     Instance of type that implements interface
         ///     <see cref="IValidator{GoodDomainModel}"/>.
         /// </param>
+        /// <param name="categoryService">
+        ///     Category's service.
+        /// </param>
         public GoodService(
             ApplicationDbContext context,
             IMapper mapper,
-            IValidator<GoodDomainModel> goodDomainModelValidator)
+            IValidator<GoodDomainModel> goodDomainModelValidator,
+            ICategoryService categoryService)
         {
             this._context = context;
             this._mapper = mapper;
             this._goodDomainModelValidator = goodDomainModelValidator;
+            this._categoryService = categoryService;
         }
 
         /// <inheritdoc />
@@ -143,24 +150,30 @@ namespace MoreForLess.BusinessLogic.Services
         }
 
         /// <inheritdoc />
-        public async Task<GoodPagingDomainModel> GetAllGoodsAsync(int currentPage, int itemsPerPage)
+        public async Task<GoodPagingDomainModel> GetAllGoodsAsync(PageCategoryModel pageCategoryModel)
         {
-            _logger.Info("Counting number of goods has been placed into database.");
-            var totalItems = await this._context.Goods.CountAsync();
+            _logger.Info($"Retrieving collection of good items that belong category's id: {pageCategoryModel.CategoryId}.");
+            var storeCategory = await this._categoryService.GetCategoryByIdAltAsync(pageCategoryModel.CategoryId);
 
-            _logger.Info("Retrieving collection of good items.");
-            var goods = await this._context.Goods
+            var goodsToCount = storeCategory.Children
+                .Flatten(c => c.Children)
+                .SelectMany(c => c.Goods)
+                .Concat(storeCategory.Goods);
+
+            _logger.Info("Counting number of goods has been placed into database.");
+            var totalItems = goodsToCount.Count();
+
+            var goods = goodsToCount
                 .OrderBy(g => g.Id)
-                .Skip((currentPage - 1) * itemsPerPage)
-                .Take(itemsPerPage)
-                .ToListAsync();
+                .Skip((pageCategoryModel.CurrentPage - 1) * pageCategoryModel.ItemsPerPage)
+                .Take(pageCategoryModel.ItemsPerPage);
 
             var goodDomainModels = goods.Select(good => this._mapper.Map<GoodDomainModel>(good));
 
             var pagingDomainModel = new PagingDomainModel
             {
-                CurrentPage = currentPage,
-                ItemsPerPage = itemsPerPage,
+                CurrentPage = pageCategoryModel.CurrentPage,
+                ItemsPerPage = pageCategoryModel.ItemsPerPage,
                 TotalItems = totalItems
             };
 

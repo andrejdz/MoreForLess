@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreForLess.DataAccess", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreForLess.BusinessLogic", "MoreForLess.BusinessLogic\MoreForLess.BusinessLogic.csproj", "{CC46F246-1DFE-4CAD-8667-3F1E0ED0EBE0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{77D5CB69-2242-4BE9-BA85-0C91E933924F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreForLess.BusinessLogic.Tests", "MoreForLess.BusinessLogic.Tests\MoreForLess.BusinessLogic.Tests.csproj", "{78FADB23-5F53-4EA0-8406-3D4721EABBF1}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{632E1E0D-E9B4-4423-B954-F3D935EBA71A}"
 	ProjectSection(SolutionItems) = preProject
 		Custom.ruleset = Custom.ruleset
@@ -36,16 +32,9 @@ Global
 		{CC46F246-1DFE-4CAD-8667-3F1E0ED0EBE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC46F246-1DFE-4CAD-8667-3F1E0ED0EBE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC46F246-1DFE-4CAD-8667-3F1E0ED0EBE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78FADB23-5F53-4EA0-8406-3D4721EABBF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78FADB23-5F53-4EA0-8406-3D4721EABBF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78FADB23-5F53-4EA0-8406-3D4721EABBF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78FADB23-5F53-4EA0-8406-3D4721EABBF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{78FADB23-5F53-4EA0-8406-3D4721EABBF1} = {77D5CB69-2242-4BE9-BA85-0C91E933924F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8CA5308-2563-4C81-B5DF-B2DDA8E8FD67}

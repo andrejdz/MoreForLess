@@ -158,5 +158,58 @@ namespace MoreForLess.BusinessLogic.Services
                 return false;
             }
         }
+
+        /// <inheritdoc />
+        public async Task<StoreCategory> GetCategoryByIdAltAsync(string id)
+        {
+            _logger.Info($"Getting category by its id: {id}.");
+            StoreCategory storeCategory;
+            try
+            {
+                storeCategory = await this._context.StoreCategories
+                    .Where(c => c.IdAtStore == id)
+                    .SingleAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new ArgumentException("Category hasn't been found.", ex);
+            }
+
+            return storeCategory;
+        }
+
+        /// <inheritdoc />
+        public async Task<bool> IsCategoryInInheritanceChain(string categoryId, string goodId)
+        {
+            _logger.Info($"Getting category by its id: {goodId}.");
+
+            StoreCategory storeCategory = await this._context.StoreCategories
+                .SingleAsync(c => c.IdAtStore == goodId);
+
+            if (storeCategory.IdAtStore == categoryId)
+            {
+                return true;
+            }
+            else
+            {
+                return this.LookingForCategory(categoryId, storeCategory.Parent);
+            }
+        }
+
+        private bool LookingForCategory(string categoryId, StoreCategory storeCategory)
+        {
+            if (storeCategory.IdAtStore == categoryId)
+            {
+                return true;
+            }
+            else if (storeCategory.ParentIdAtStore == null)
+            {
+                return false;
+            }
+            else
+            {
+                return this.LookingForCategory(categoryId, storeCategory.Parent);
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace MoreForLess.BusinessLogic.Validation
         {
             this.RuleFor(p => p.CurrentPage)
                 .GreaterThan(0)
-                .WithMessage(p => $"Value: {nameof(p.CurrentPage)} less than ot equal to zero.")
+                .WithMessage(p => $"Value: {nameof(p.CurrentPage)} less than or equal to zero.")
                 .LessThanOrEqualTo(p => p.TotalPages)
                 .WithMessage(p => $"Value: {nameof(p.CurrentPage)} grater than value: {nameof(p.TotalPages)}.");
 
