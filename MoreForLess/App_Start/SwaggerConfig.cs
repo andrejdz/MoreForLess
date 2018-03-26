@@ -100,7 +100,7 @@ namespace MoreForLess
                         // more Xml comment files.
 
                         c.IncludeXmlComments(string.Format(
-                            $@"{System.AppDomain.CurrentDomain.BaseDirectory}MoreForLess.xml"));
+                            $@"{System.AppDomain.CurrentDomain.BaseDirectory}bin\MoreForLess.xml"));
 
                         // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.
